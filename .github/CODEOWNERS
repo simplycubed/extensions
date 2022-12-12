@@ -1,0 +1,9 @@
+# Dependencies, package.json and mono-repo files
+package.json     @fireflow
+*/package.json   @fireflow
+lerna.json       @fireflow
+
+# Tests
+jest.config.js   @fireflow
+*/jest.config.js @fireflow
+__tests__/*      @fireflow
