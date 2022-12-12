@@ -1,6 +1,6 @@
-# Fireflow
+# Extensions
 
-This project contains open source Firebase and Webflow integrations.
+This project contains open source Firebase Extensions for Webflow.
 
 
 ## License
