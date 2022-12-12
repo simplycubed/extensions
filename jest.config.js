@@ -1,5 +1,7 @@
 module.exports = {
-  projects: [],
+  projects: [
+    "webflow-memberships"
+  ],
   testPathIgnorePatterns: [
     ".*/bin/",
     ".*/lib/",
