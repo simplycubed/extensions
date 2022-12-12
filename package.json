@@ -31,7 +31,7 @@
     "lint-staged": "^12.4.0",
     "concurrently": "^7.2.1",
     "jest": "^24.9.0",
-    "lerna": "^3.4.3",
+    "lerna": "^6.1.0",
     "prettier": "2.7.1",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"
