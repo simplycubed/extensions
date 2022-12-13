@@ -15,15 +15,15 @@ If you have a general question, need help debugging, or fall into some
 other category use one of these other channels:
 
 - For general technical questions, post a question on [StackOverflow](http://stackoverflow.com/)
-  with the firebase tag.
+  with the simplycubed or firebase tag.
+- To file a bug against SimplyCubed for an issue affecting multiple extensions, please reach out to [SimplyCubed Support](mailto:support@simplycubed.com)
 - For general Firebase discussion, use the [firebase-talk](https://groups.google.com/forum/#!forum/firebase-talk)
   google group.
-- To file a bug against the Firebase Extensions platform, or for an issue affecting multiple extensions, please reach out to
-  [Firebase support](https://firebase.google.com/support/troubleshooter/contact/) directly.
+- To file a bug against the Firebase Extensions platform, or for an issue affecting multiple extensions, please reach out to [Firebase Support](https://firebase.google.com/support/troubleshooter/contact/) directly.
 
 ### [REQUIRED] Step 2: Describe your configuration
 
-- Extension name: **\_** (`extension1`, `extension2`, etc)
+- Extension name: **\_** (`webflow-memberships`, `extension2`, etc)
 - Extension version: **\_**
 - Configuration values (redact info where appropriate):
   - **\_**

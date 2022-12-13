@@ -22,7 +22,7 @@
   "author": "Firebase (https://simplycubed.com/)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/simplycubed/extensions/issues/new/choose"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",

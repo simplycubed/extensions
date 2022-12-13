@@ -1,6 +1,7 @@
 {
 	  "packages": [
-    "*"
+    "*",
+		"webflow-memberships"
 	],
 	"version": "0.0.0"
 }
