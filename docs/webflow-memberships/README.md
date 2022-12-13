@@ -57,3 +57,7 @@ When configuring the Cloud Firestore, Realtime Database & Cloud Storage paths, i
 - Cloud Firestore path(s): `users/{_id},admins/{_id}`
 - Realtime Database path(s): `users/{_id}`
 - Cloud Storage path(s): `{DEFAULT}/users/{_id},{DEFAULT}/admins/{_id}`
+
+
+## ⚠️ DISCLAIMER
+This package is not an official Google Firebase or Webflow product. It is an open-source community product supported by SimplyCubed.
