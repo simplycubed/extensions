@@ -11,11 +11,9 @@ template_path=.github/ISSUE_TEMPLATE/bug.md
 ### [READ] Step 1: Are you in the right place?
 
 Issues filed here should be about bugs for a **specific extension in this repository**.
-If you have a general question, need help debugging, or fall into some
-other category use one of these other channels:
+If you have a general question, need help debugging, or fall into some other category use one of these other channels:
 
-- For general technical questions, post a question on [StackOverflow](http://stackoverflow.com/)
-  with the simplycubed or firebase tag.
+- For general technical questions, post a question on [StackOverflow](http://stackoverflow.com/) with the simplycubed or firebase tag.
 - To file a bug against SimplyCubed for an issue affecting multiple extensions, please reach out to [SimplyCubed Support](mailto:support@simplycubed.com)
 - For general Firebase discussion, use the [firebase-talk](https://groups.google.com/forum/#!forum/firebase-talk)
   google group.
