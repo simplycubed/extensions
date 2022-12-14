@@ -1,7 +1,6 @@
 {
   "extensions": {
-    "firestore-send-email": "../firestore-send-email",
-    "delete-user-data": "../delete-user-data"
+    "webflow-memberships": "../webflow-memberships"
   },
   "storage": {
     "rules": "storage.rules"
