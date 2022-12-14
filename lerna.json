@@ -1,7 +1,4 @@
 {
-	  "packages": [
-    "*",
-		"webflow-memberships"
-	],
-	"version": "0.0.0"
+  "packages": ["*", "webflow-memberships/functions"],
+  "version": "0.0.0"
 }

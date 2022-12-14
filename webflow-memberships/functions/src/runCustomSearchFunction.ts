@@ -17,7 +17,7 @@ export const runCustomSearchFunction = async (uid: string): Promise<void> => {
   }
 
   /** Get user resonse **/
-  const json = await response.json();
+  const json: any = await response.json();
 
   // Support returning an array directly
   if (Array.isArray(json)) {
