@@ -1,5 +1,6 @@
+"use strict";
 /*
- * Copyright 2019 Google LLC
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export default {
-  location: process.env.LOCATION,
-  maxCount: Number(process.env.MAX_COUNT),
-  databaseInstance: process.env.SELECTED_DATABASE_INSTANCE,
-  nodePath: process.env.NODE_PATH,
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDatabaseUrl = void 0;
+const getDatabaseUrl = (selectedDatabaseInstance, selectedDatabaseLocation) => {
+  if (!selectedDatabaseLocation || !selectedDatabaseInstance) return null;
+  if (selectedDatabaseLocation === "us-central1")
+    return `https://${selectedDatabaseInstance}.firebaseio.com`;
+  return `https://${selectedDatabaseInstance}.${selectedDatabaseLocation}.firebasedatabase.app`;
 };
+exports.getDatabaseUrl = getDatabaseUrl;
