@@ -78,7 +78,7 @@ export const handleDeletion = functions.pubsub
 
     if (eventChannel) {
       await eventChannel.publish({
-        type: `firebase.extensions.delete-user-data.v1.firestore`,
+        type: `firebase.extensions.webflow-memberships.v1.firestore`,
         data: {
           uid,
           documentPaths: paths,
@@ -114,7 +114,7 @@ export const handleSearch = functions.pubsub
         if (eventChannel) {
           /** Publish event to EventArc */
           await eventChannel.publish({
-            type: `firebase.extensions.delete-user-data.v1.firestore`,
+            type: `firebase.extensions.webflow-memberships.v1.firestore`,
             data: {
               uid,
               collectionPath: collection.path,
@@ -235,7 +235,7 @@ const clearDatabaseData = async (databasePaths: string, uid: string) => {
   if (eventChannel) {
     /** Send database deletion event */
     await eventChannel.publish({
-      type: `firebase.extensions.delete-user-data.v1.database`,
+      type: `firebase.extensions.webflow-memberships.v1.database`,
       data: {
         uid,
         paths,
@@ -278,7 +278,7 @@ const clearStorageData = async (storagePaths: string, uid: string) => {
   if (eventChannel) {
     /** Send storage deletion event */
     await eventChannel.publish({
-      type: `firebase.extensions.delete-user-data.v1.storage`,
+      type: `firebase.extensions.webflow-memberships.v1.storage`,
       data: {
         uid,
         paths,
@@ -326,7 +326,7 @@ const clearFirestoreData = async (firestorePaths: string, uid: string) => {
   if (eventChannel) {
     /** Send firestore deletion event */
     await eventChannel.publish({
-      type: `firebase.extensions.delete-user-data.v1.firestore`,
+      type: `firebase.extensions.webflow-memberships.v1.firestore`,
       data: {
         uid,
         documentPaths: paths,

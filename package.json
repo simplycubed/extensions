@@ -1,8 +1,8 @@
 {
-  "name": "fireflow-extensions",
+  "name": "simplycubed-extensions",
   "version": "1.0.0",
-  "description": "Repository of Webflow integrations for Firebase Extensions.",
-  "private": true,
+  "description": "Repository of SimplyCubed Extensions for Firebase.",
+  "private": false,
   "scripts": {
     "format": "prettier --write \"**/*.{js,md,yml,ts,json,yaml}\"",
     "lint": "prettier --list-different \"**/*.{js,md,yml,ts,json,yaml}\"",
@@ -19,7 +19,7 @@
     "prepare": "husky install"
   },
   "repository": "",
-  "author": "Firebase (https://simplycubed.com/)",
+  "author": "Charles Green (https://simplycubed.com/)",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/simplycubed/extensions/issues/new/choose"
