@@ -1,7 +1,5 @@
 module.exports = {
-  projects: [
-    "webflow-memberships"
-  ],
+  projects: ["<rootDir>/*/functions/jest.config.js"],
   testPathIgnorePatterns: [
     ".*/bin/",
     ".*/lib/",

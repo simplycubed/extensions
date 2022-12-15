@@ -1,9 +1,9 @@
 # Dependencies, package.json and mono-repo files
-package.json     @fireflow
-*/package.json   @fireflow
-lerna.json       @fireflow
+package.json     @extensions
+*/package.json   @extensions
+lerna.json       @extensions
 
 # Tests
-jest.config.js   @fireflow
-*/jest.config.js @fireflow
-__tests__/*      @fireflow
+jest.config.js   @extensions
+*/jest.config.js @extensions
+__tests__/*      @extensions
