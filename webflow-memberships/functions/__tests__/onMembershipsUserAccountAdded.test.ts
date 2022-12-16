@@ -12,6 +12,7 @@ admin.initializeApp();
 const db = admin.firestore();
 
 describe("Test onMembershipsUserAccountAdded", () => {
+  // TODO: add clean up functions
   test("Should create user document is firestore", async () => {
     const userId = "6287ec36a841b25637c663df";
     await handleOnMembershipsUserAccountAdded(db, {
