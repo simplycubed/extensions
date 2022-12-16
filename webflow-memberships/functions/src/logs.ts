@@ -119,3 +119,7 @@ export const storagePathError = (path: string, err: Error) => {
 export const customFunctionError = (err: Error) => {
   logger.error(`Call to custom hook function threw an error`, err);
 };
+
+export const logUserAddedPayload = (payload: any) => {
+  logger.error(`User Added Payload received: `, payload);
+};

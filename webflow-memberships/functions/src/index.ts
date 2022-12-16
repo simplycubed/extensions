@@ -27,6 +27,7 @@ import * as logs from "./logs";
 import { search } from "./search";
 import { runCustomSearchFunction } from "./runCustomSearchFunction";
 import { runBatchPubSubDeletions } from "./runBatchPubSubDeletions";
+import { handleOnMembershipsUserAccountAdded } from "./onMembershipsUserAccountAdded";
 
 // Helper function for selecting correct domain adrress
 const databaseURL = getDatabaseUrl(
@@ -215,6 +216,18 @@ export const clearData = functions.auth.user().onDelete(async (user) => {
 
   logs.complete(uid);
 });
+
+/*
+ * The onMembershipsUserAccountAdded function creates new webflow user in firestore and then
+ * returns a success message.
+ */
+export const onMembershipsUserAccountAdded = functions.https.onRequest(
+  async (req, res) => {
+    logs.logUserAddedPayload(req.body);
+    await handleOnMembershipsUserAccountAdded(db, req.body);
+    res.json({ success: true });
+  }
+);
 
 const clearDatabaseData = async (databasePaths: string, uid: string) => {
   logs.rtdbDeleting();

@@ -32,4 +32,5 @@ export default {
   searchDepth: process.env.AUTO_DISCOVERY_SEARCH_DEPTH
     ? parseInt(process.env.AUTO_DISCOVERY_SEARCH_DEPTH)
     : 3,
+  userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
 };
