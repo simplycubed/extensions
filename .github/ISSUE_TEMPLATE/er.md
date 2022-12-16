@@ -10,11 +10,11 @@ template_path=.github/ISSUE_TEMPLATE/er.md
 
 ### [READ] Step 1: Are you in the right place?
 
-Issues filed here should be about a new extension request. 
+Issues filed here should be about a new extension request.
 
 ### [REQUIRED] Step 2: Extension name
 
-This new extension request is for extension:  **\_** (`new-extension-name`)
+This new extension request is for extension: **\_** (`new-extension-name`)
 
 ### What extension and features would you like to see?
 
