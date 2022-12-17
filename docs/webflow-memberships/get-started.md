@@ -36,6 +36,8 @@ During the installation of the extension, you will be prompted to specify a numb
 
 - **Cloud Firestore paths:**
 
+  > The createdOn and updatedOn timestamps have been converted from strings to timestamps.
+
   Which paths in your Cloud Firestore instance contains user data? Leave empty if you don't use Cloud Firestore. Enter the full paths, separated by commas. You can represent the User ID of the user with `{_id}`. For example, if you have the collections `users` and `admins`, and each collection has documents with the User ID as document IDs, then you can enter `users/{_id},admins/{_id}`.
 
 - **Realtime Database instance:**
@@ -48,9 +50,13 @@ During the installation of the extension, you will be prompted to specify a numb
 
 - **Realtime Database paths:**
 
-  Which paths in your Realtime Database instance contain user data? Leave empty if you don't use Realtime Database. Enter the full paths, separated by commas. You can represent the User ID of the user with `{_id}`. For example: `users/{_id},admins/{_id}`.
+> The createdOn and updatedOn timestamps have been converted from strings to timestamps.
+
+Which paths in your Realtime Database instance contain user data? Leave empty if you don't use Realtime Database. Enter the full paths, separated by commas. You can represent the User ID of the user with `{_id}`. For example: `users/{_id},admins/{_id}`.
 
 - **Cloud Storage paths:**
+
+  > The Webflow Membership Event object is stored as a JSON file at the specified location.
 
   Where in Google Cloud Storage do you store user data? Leave empty if you don't use Cloud Storage. Enter the full paths to files or directories in your Storage buckets, separated by commas. Use `{_id}` to represent the User ID of the new user, and use `{DEFAULT}` to represent your default Storage bucket. To manage a User ID-labeled directory (like `users/{_id}.json`), enter `{DEFAULT}/users/{_id}.json`. If you have the collections `users` and `admins`, each collection has documents with the User ID as document IDs, then you can enter `{DEFAULT}/users/{_id}.json,{DEFAULT}/admins/{_id}.json`.
 
