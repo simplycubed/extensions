@@ -4,6 +4,10 @@
 
 The Webflow Memberships extension (`webflow-memberships`) lets you create and manage users in your Firebase project when users are added or updated in [Webflow Memberships](https://webflow.com/memberships). You can configure this extension to manage users in any or all of the following: Cloud Firestore, Realtime Database, or Cloud Storage. Each trigger of the extension is keyed to the user's Webflow `_id`.
 
+### Membership Payload
+
+Full (Webflow Membership event object)[https://developers.webflow.com/reference/memberships_user_account_added] details are in the Webflow API documentation.
+
 ## Prerequisites
 
 - You must use [Webflow Memberships](https://webflow.com/memberships) to manage your users.
@@ -48,7 +52,7 @@ During the installation of the extension, you will be prompted to specify a numb
 
 - **Cloud Storage paths:**
 
-  Where in Google Cloud Storage do you store user data? Leave empty if you don't use Cloud Storage. Enter the full paths to files or directories in your Storage buckets, separated by commas. Use `{_id}` to represent the User ID of the new user, and use `{DEFAULT}` to represent your default Storage bucket. To manage a User ID-labeled directory (like `users/{_id}`), enter `{DEFAULT}/users/{_id}`. If you have the collections `users` and `admins`, each collection has documents with the User ID as document IDs, then you can enter `{DEFAULT}/users/{_id},{DEFAULT}/admins/{_id}`.
+  Where in Google Cloud Storage do you store user data? Leave empty if you don't use Cloud Storage. Enter the full paths to files or directories in your Storage buckets, separated by commas. Use `{_id}` to represent the User ID of the new user, and use `{DEFAULT}` to represent your default Storage bucket. To manage a User ID-labeled directory (like `users/{_id}.json`), enter `{DEFAULT}/users/{_id}.json`. If you have the collections `users` and `admins`, each collection has documents with the User ID as document IDs, then you can enter `{DEFAULT}/users/{_id}.json,{DEFAULT}/admins/{_id}.json`.
 
 #### By path
 
@@ -56,7 +60,7 @@ When configuring the Cloud Firestore, Realtime Database & Cloud Storage paths, i
 
 - Cloud Firestore path(s): `users/{_id},admins/{_id}`
 - Realtime Database path(s): `users/{_id}`
-- Cloud Storage path(s): `{DEFAULT}/users/{_id},{DEFAULT}/admins/{_id}`
+- Cloud Storage path(s): `{DEFAULT}/users/{_id},{DEFAULT}/admins/{_id}.json`
 
 ## Disclaimer
 
