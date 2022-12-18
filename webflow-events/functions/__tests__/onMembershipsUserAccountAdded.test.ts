@@ -1,5 +1,5 @@
 import * as admin from "firebase-admin";
-import setupEnvironment from "../__tests__/helpers/setupEnvironment";
+import setupEnvironment from "./helpers/setupEnvironment";
 import { handleOnMembershipsUserAccountAdded } from "../src/webflowHook/handler";
 import { UserAccountAddedPayload } from "../src/webflowHook/types";
 

@@ -1,7 +1,7 @@
 {
   "packages": [
     "*",
-    "webflow-memberships/functions",
+    "webflow-events/functions",
     "webflow-memberships/test-data"
   ],
   "version": "0.0.0"
