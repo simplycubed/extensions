@@ -14,34 +14,18 @@
  * limitations under the License.
  */
 
-import * as admin from "firebase-admin";
 import { FieldPath, DocumentReference } from "firebase-admin/firestore";
 import * as functions from "firebase-functions";
 import * as firebase_tools from "firebase-tools";
-import { getDatabaseUrl } from "./helpers";
 import chunk from "lodash.chunk";
 import { getEventarc } from "firebase-admin/eventarc";
-
 import config from "./config";
-import * as logs from "./logs";
 import { search } from "./search";
 import { runCustomSearchFunction } from "./runCustomSearchFunction";
 import { runBatchPubSubDeletions } from "./runBatchPubSubDeletions";
-import { handleOnMembershipsUserAccountAdded } from "./onMembershipsUserAccountAdded";
-
-// Helper function for selecting correct domain adrress
-const databaseURL = getDatabaseUrl(
-  config.selectedDatabaseInstance,
-  config.selectedDatabaseLocation
-);
-
-// Initialize the Firebase Admin SDK
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  databaseURL,
-});
-
-const db = admin.firestore();
+import { firstoreDb as db, databaseURL, database, storage } from "./init";
+import * as logs from "./logs";
+import { webhookApp } from "./webflowHook/app";
 
 /** Setup EventArc Channels */
 const eventChannel =
@@ -49,8 +33,6 @@ const eventChannel =
   getEventarc().channel(process.env.EVENTARC_CHANNEL, {
     allowedEventTypes: process.env.EXT_SELECTED_EVENTS,
   });
-
-logs.init();
 
 export const handleDeletion = functions.pubsub
   .topic(config.deletionTopic)
@@ -217,17 +199,7 @@ export const clearData = functions.auth.user().onDelete(async (user) => {
   logs.complete(uid);
 });
 
-/*
- * The onMembershipsUserAccountAdded function creates new webflow user in firestore and then
- * returns a success message.
- */
-export const onMembershipsUserAccountAdded = functions.https.onRequest(
-  async (req, res) => {
-    logs.logUserAddedPayload(req.body);
-    await handleOnMembershipsUserAccountAdded(db, req.body);
-    res.json({ success: true });
-  }
-);
+export const webflowHook = functions.https.onRequest(webhookApp);
 
 const clearDatabaseData = async (databasePaths: string, uid: string) => {
   logs.rtdbDeleting();
@@ -236,7 +208,7 @@ const clearDatabaseData = async (databasePaths: string, uid: string) => {
   const promises = paths.map(async (path) => {
     try {
       logs.rtdbPathDeleting(path);
-      await admin.database().ref(path).remove();
+      await database.ref(path).remove();
       logs.rtdbPathDeleted(path);
     } catch (err) {
       logs.rtdbPathError(path, err);
@@ -268,8 +240,8 @@ const clearStorageData = async (storagePaths: string, uid: string) => {
     const bucketName = parts[0];
     const bucket =
       bucketName === "{DEFAULT}"
-        ? admin.storage().bucket(config.storageBucketDefault)
-        : admin.storage().bucket(bucketName);
+        ? storage.bucket(config.storageBucketDefault)
+        : storage.bucket(bucketName);
     const prefix = parts.slice(1).join("/");
     try {
       logs.storagePathDeleting(prefix);
@@ -311,7 +283,7 @@ const clearFirestoreData = async (firestorePaths: string, uid: string) => {
       const isRecursive = config.firestoreDeleteMode === "recursive";
 
       if (!isRecursive) {
-        const firestore = admin.firestore();
+        const firestore = db;
         logs.firestorePathDeleting(path, false);
 
         // Wrapping in transaction to allow for automatic retries (#48)
