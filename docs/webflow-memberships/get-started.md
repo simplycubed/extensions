@@ -2,7 +2,7 @@
 
 ## Using the Webflow Memberships extension
 
-The Webflow Memberships extension (`webflow-memberships`) lets you create and manage users in your Firebase project when users are added or updated in [Webflow Memberships](https://webflow.com/memberships). You can configure this extension to manage users in any or all of the following: Cloud Firestore, Realtime Database, or Cloud Storage. Each trigger of the extension is keyed to the user's Webflow `_id`.
+The Webflow Memberships extension (`webflow-memberships`) lets you sync user data in your Firebase project when users are added or updated in [Webflow Memberships](https://webflow.com/memberships) the user data is synced with Cloud Firestore, Realtime Database, or Cloud Storage.
 
 ### Membership Payload
 
@@ -11,8 +11,6 @@ Full (Webflow Membership event object)[https://developers.webflow.com/reference/
 ## Prerequisites
 
 - You must use [Webflow Memberships](https://webflow.com/memberships) to manage your users.
-
-- This extension is used to manage user data in your Firebase project's [Cloud Firestore](https://firebase.google.com/docs/firestore), [Realtime Database](https://firebase.google.com/docs/database), and/or [Cloud Storage](https://firebase.google.com/docs/storage) to keep them in sync with the data stored in Webflow.
 
 ## **Install the extension**
 
@@ -28,7 +26,7 @@ To install the extension, follow the steps on the [Install Firebase Extension](h
   firebase ext:install simplycubed/webflow-memberships --project=projectId-or-alias
   ```
 
-During the installation of the extension, you will be prompted to specify a number of configuration parameters:
+During the installation of the extension, you will be prompted to specify the following configuration parameters:
 
 - **Cloud Functions location:**
 
@@ -38,7 +36,7 @@ During the installation of the extension, you will be prompted to specify a numb
 
   > The createdOn and updatedOn timestamps have been converted from strings to timestamps.
 
-  Which paths in your Cloud Firestore instance contains user data? Leave empty if you don't use Cloud Firestore. Enter the full paths, separated by commas. You can represent the User ID of the user with `{_id}`. For example, if you have the collections `users` and `admins`, and each collection has documents with the User ID as document IDs, then you can enter `users/{_id},admins/{_id}`.
+  Desired path to store the data in Cloud Firestore? Leave empty if you don't use Cloud Firestore. For example, `users`, `simplycubed`, `webflow` etc. setting `users` will result in in `users/{_id}`.
 
 - **Realtime Database instance:**
 
@@ -52,21 +50,13 @@ During the installation of the extension, you will be prompted to specify a numb
 
 > The createdOn and updatedOn timestamps have been converted from strings to timestamps.
 
-Which paths in your Realtime Database instance contain user data? Leave empty if you don't use Realtime Database. Enter the full paths, separated by commas. You can represent the User ID of the user with `{_id}`. For example: `users/{_id},admins/{_id}`.
+Desired path to store the data in the Realtime Database? Leave empty if you don't use Realtime Database. Enter the collection name, for example: `users`, `simplycubed`, `webflow`, etc. setting `users` will result in `users/{_id}`.
 
 - **Cloud Storage paths:**
 
   > The Webflow Membership Event object is stored as a JSON file at the specified location.
 
-  Where in Google Cloud Storage do you store user data? Leave empty if you don't use Cloud Storage. Enter the full paths to files or directories in your Storage buckets, separated by commas. Use `{_id}` to represent the User ID of the new user, and use `{DEFAULT}` to represent your default Storage bucket. To manage a User ID-labeled directory (like `users/{_id}.json`), enter `{DEFAULT}/users/{_id}.json`. If you have the collections `users` and `admins`, each collection has documents with the User ID as document IDs, then you can enter `{DEFAULT}/users/{_id}.json,{DEFAULT}/admins/{_id}.json`.
-
-#### By path
-
-When configuring the Cloud Firestore, Realtime Database & Cloud Storage paths, it’s possible to define a `_id` variable in the paths which will be replaced with the authenticated user’s Webflow `_id`. When a user is created, the extension will update all data keyed on that UID at the given paths, for example:
-
-- Cloud Firestore path(s): `users/{_id},admins/{_id}`
-- Realtime Database path(s): `users/{_id}`
-- Cloud Storage path(s): `{DEFAULT}/users/{_id},{DEFAULT}/admins/{_id}.json`
+  Desired location in Google Cloud Storage? Leave empty if you don't use Cloud Storage. Enter the Storage bucket name including any specific directory. Use `{DEFAULT}` to represent your default Storage bucket. For example, setting the default bucket with the `users` directory would result in `{DEFAULT}/users/{_id}.json`.
 
 ## Disclaimer
 
