@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Copyright 2019 Google LLC
  *
@@ -13,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export default {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
   location: process.env.LOCATION,
   firestorePaths: process.env.FIRESTORE_PATHS,
   firestoreDeleteMode: process.env.FIRESTORE_DELETE_MODE,

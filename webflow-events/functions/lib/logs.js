@@ -20,7 +20,8 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.customFunctionError =
+exports.logUserAddedPayload =
+  exports.customFunctionError =
   exports.storagePathError =
   exports.storagePath404 =
   exports.storagePathDeleting =
@@ -184,3 +185,7 @@ const customFunctionError = (err) => {
   );
 };
 exports.customFunctionError = customFunctionError;
+const logUserAddedPayload = (payload) => {
+  firebase_functions_1.logger.error(`User Added Payload received: `, payload);
+};
+exports.logUserAddedPayload = logUserAddedPayload;

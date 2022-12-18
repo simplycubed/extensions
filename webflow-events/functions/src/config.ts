@@ -1,4 +1,3 @@
-"use strict";
 /*
  * Copyright 2019 Google LLC
  *
@@ -14,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+
+export default {
   location: process.env.LOCATION,
   firestorePaths: process.env.FIRESTORE_PATHS,
   firestoreDeleteMode: process.env.FIRESTORE_DELETE_MODE,
@@ -33,4 +32,6 @@ exports.default = {
   searchDepth: process.env.AUTO_DISCOVERY_SEARCH_DEPTH
     ? parseInt(process.env.AUTO_DISCOVERY_SEARCH_DEPTH)
     : 3,
+  userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
+  storageUserPath: process.env.STORAGE_USER_PATH,
 };
