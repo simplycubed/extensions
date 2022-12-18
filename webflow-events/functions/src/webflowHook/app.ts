@@ -1,8 +1,8 @@
 import express from "express";
 import morgan from "morgan";
 import { logUserAddedPayload } from "../logs";
-import { handleOnMembershipsUserAccountAdded } from "./handler";
-import { firstoreDb } from "../init";
+import { handleMembershipsUserAccountAdded } from "./handler";
+import { firstoreDb, storage } from "../init";
 
 export const webhookApp = express();
 
@@ -24,7 +24,7 @@ webhookApp.get("/health", (req, res) => {
 
 webhookApp.post("/membershipsUserAccountAdded", async (req, res) => {
   logUserAddedPayload(req.body);
-  await handleOnMembershipsUserAccountAdded(firstoreDb, req.body);
+  await handleMembershipsUserAccountAdded(firstoreDb, storage, req.body);
   res.status(200).json({ status: `done` });
 });
 

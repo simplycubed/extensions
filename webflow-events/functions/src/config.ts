@@ -33,4 +33,5 @@ export default {
     ? parseInt(process.env.AUTO_DISCOVERY_SEARCH_DEPTH)
     : 3,
   userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
+  storageUserPath: process.env.STORAGE_USER_PATH,
 };

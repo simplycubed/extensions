@@ -1,4 +1,4 @@
-import { firestore } from "firebase-admin";
+import { firestore, storage } from "firebase-admin";
 import config from "../config";
 import { UserAccountAddedPayload } from "./types";
 
@@ -6,13 +6,22 @@ import { UserAccountAddedPayload } from "./types";
  * The onMembershipsUserAccountAdded function creates new webflow user in firestore and then
  * returns a success message.
  */
-export const handleOnMembershipsUserAccountAdded = async (
+export const handleMembershipsUserAccountAdded = async (
   db: firestore.Firestore,
+  storage: storage.Storage,
   payload: UserAccountAddedPayload
 ) => {
-  // TODO: convert time strings to timestamps?
-  return db
+  await db
     .collection(config.userCollectionPath)
     .doc(payload._id)
     .set(payload, { merge: true });
+
+  if (config.storageUserPath) {
+    // sync to storage
+    const fileContents = JSON.stringify(payload);
+    await storage
+      .bucket(config.storageBucketDefault)
+      .file(`${config.storageUserPath}/${payload._id}.json`)
+      .save(fileContents, { validation: false });
+  }
 };
