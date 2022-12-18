@@ -16,22 +16,10 @@
 
 export default {
   location: process.env.LOCATION,
-  firestorePaths: process.env.FIRESTORE_PATHS,
-  firestoreDeleteMode: process.env.FIRESTORE_DELETE_MODE,
-  rtdbPaths: process.env.RTDB_PATHS,
-  storagePaths: process.env.STORAGE_PATHS,
-  enableSearch: process.env.ENABLE_AUTO_DISCOVERY === "yes",
   storageBucketDefault:
     process.env.CLOUD_STORAGE_BUCKET || process.env.STORAGE_BUCKET,
   selectedDatabaseInstance: process.env.SELECTED_DATABASE_INSTANCE,
   selectedDatabaseLocation: process.env.SELECTED_DATABASE_LOCATION,
-  searchFields: process.env.AUTO_DISCOVERY_SEARCH_FIELDS || "",
-  searchFunction: process.env.SEARCH_FUNCTION,
-  discoveryTopic: `ext-${process.env.EXT_INSTANCE_ID}-discovery`,
-  deletionTopic: `ext-${process.env.EXT_INSTANCE_ID}-deletion`,
-  searchDepth: process.env.AUTO_DISCOVERY_SEARCH_DEPTH
-    ? parseInt(process.env.AUTO_DISCOVERY_SEARCH_DEPTH)
-    : 3,
   userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
   storageUserPath: process.env.STORAGE_USER_PATH,
 };
