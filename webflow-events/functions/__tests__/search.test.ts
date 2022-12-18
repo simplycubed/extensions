@@ -6,7 +6,7 @@ import {
   waitForCollectionDeletion,
   waitForDocumentDeletion,
 } from "./helpers";
-import setupEnvironment from "../__tests__/helpers/setupEnvironment";
+import setupEnvironment from "./helpers/setupEnvironment";
 import config from "../src/config";
 
 const environment = {

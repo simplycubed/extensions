@@ -64,37 +64,29 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clearData = exports.handleSearch = exports.handleDeletion = void 0;
-const admin = __importStar(require("firebase-admin"));
+exports.webflowHook =
+  exports.clearData =
+  exports.handleSearch =
+  exports.handleDeletion =
+    void 0;
 const firestore_1 = require("firebase-admin/firestore");
 const functions = __importStar(require("firebase-functions"));
 const firebase_tools = __importStar(require("firebase-tools"));
-const helpers_1 = require("./helpers");
 const lodash_chunk_1 = __importDefault(require("lodash.chunk"));
 const eventarc_1 = require("firebase-admin/eventarc");
 const config_1 = __importDefault(require("./config"));
-const logs = __importStar(require("./logs"));
 const search_1 = require("./search");
 const runCustomSearchFunction_1 = require("./runCustomSearchFunction");
 const runBatchPubSubDeletions_1 = require("./runBatchPubSubDeletions");
-// Helper function for selecting correct domain adrress
-const databaseURL = (0, helpers_1.getDatabaseUrl)(
-  config_1.default.selectedDatabaseInstance,
-  config_1.default.selectedDatabaseLocation
-);
-// Initialize the Firebase Admin SDK
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  databaseURL,
-});
-const db = admin.firestore();
+const init_1 = require("./init");
+const logs = __importStar(require("./logs"));
+const app_1 = require("./webflowHook/app");
 /** Setup EventArc Channels */
 const eventChannel =
   process.env.EVENTARC_CHANNEL &&
   (0, eventarc_1.getEventarc)().channel(process.env.EVENTARC_CHANNEL, {
     allowedEventTypes: process.env.EXT_SELECTED_EVENTS,
   });
-logs.init();
 exports.handleDeletion = functions.pubsub
   .topic(config_1.default.deletionTopic)
   .onPublish(async (message) => {
@@ -105,10 +97,10 @@ exports.handleDeletion = functions.pubsub
     const uid = data.uid;
     const batchArray = [];
     (0, lodash_chunk_1.default)(paths, 450).forEach((chunk) => {
-      const batch = db.batch();
+      const batch = init_1.firstoreDb.batch();
       /** Loop through each path query */
       for (const path of chunk) {
-        const docRef = db.doc(path);
+        const docRef = init_1.firstoreDb.doc(path);
         batch.delete(docRef);
       }
       batchArray.push(batch);
@@ -135,7 +127,7 @@ exports.handleSearch = functions.pubsub
     const nextDepth = data.depth + 1;
     const uid = data.uid;
     // Create a collection reference from the path
-    const collection = db.collection(path);
+    const collection = init_1.firstoreDb.collection(path);
     if (depth <= config_1.default.searchDepth) {
       // If the collection ID is the same as the UID, delete the entire collection and sub-collections
       if (collection.id === uid) {
@@ -177,7 +169,9 @@ exports.handleSearch = functions.pubsub
       );
       // Get any documents which need searching, and then check their fields.
       if (documentReferencesToSearch.length > 0) {
-        const snapshots = await db.getAll(...documentReferencesToSearch);
+        const snapshots = await init_1.firstoreDb.getAll(
+          ...documentReferencesToSearch
+        );
         for (const snapshot of snapshots) {
           if (snapshot.exists) {
             for (const field of config_1.default.searchFields.split(",")) {
@@ -213,7 +207,7 @@ exports.clearData = functions.auth.user().onDelete(async (user) => {
   } else {
     logs.firestoreNotConfigured();
   }
-  if (rtdbPaths && databaseURL) {
+  if (rtdbPaths && init_1.databaseURL) {
     promises.push(clearDatabaseData(rtdbPaths, uid));
   } else {
     logs.rtdbNotConfigured();
@@ -237,13 +231,14 @@ exports.clearData = functions.auth.user().onDelete(async (user) => {
   }
   logs.complete(uid);
 });
+exports.webflowHook = functions.https.onRequest(app_1.webhookApp);
 const clearDatabaseData = async (databasePaths, uid) => {
   logs.rtdbDeleting();
   const paths = extractUserPaths(databasePaths, uid);
   const promises = paths.map(async (path) => {
     try {
       logs.rtdbPathDeleting(path);
-      await admin.database().ref(path).remove();
+      await init_1.database.ref(path).remove();
       logs.rtdbPathDeleted(path);
     } catch (err) {
       logs.rtdbPathError(path, err);
@@ -270,8 +265,8 @@ const clearStorageData = async (storagePaths, uid) => {
     const bucketName = parts[0];
     const bucket =
       bucketName === "{DEFAULT}"
-        ? admin.storage().bucket(config_1.default.storageBucketDefault)
-        : admin.storage().bucket(bucketName);
+        ? init_1.storage.bucket(config_1.default.storageBucketDefault)
+        : init_1.storage.bucket(bucketName);
     const prefix = parts.slice(1).join("/");
     try {
       logs.storagePathDeleting(prefix);
@@ -307,7 +302,7 @@ const clearFirestoreData = async (firestorePaths, uid) => {
     try {
       const isRecursive = config_1.default.firestoreDeleteMode === "recursive";
       if (!isRecursive) {
-        const firestore = admin.firestore();
+        const firestore = init_1.firstoreDb;
         logs.firestorePathDeleting(path, false);
         // Wrapping in transaction to allow for automatic retries (#48)
         await firestore.runTransaction((transaction) => {
