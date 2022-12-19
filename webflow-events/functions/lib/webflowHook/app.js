@@ -27,8 +27,9 @@ exports.webhookApp.get("/health", (req, res) => {
 });
 exports.webhookApp.post("/membershipsUserAccountAdded", async (req, res) => {
   (0, logs_1.logUserAddedPayload)(req.body);
-  await (0, handler_1.handleOnMembershipsUserAccountAdded)(
+  await (0, handler_1.handleMembershipsUserAccountAdded)(
     init_1.firstoreDb,
+    init_1.storage,
     req.body
   );
   res.status(200).json({ status: `done` });
