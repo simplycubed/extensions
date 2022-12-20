@@ -28,3 +28,11 @@ export const customFunctionError = (err: Error) => {
 export const logUserAddedPayload = (payload: any) => {
   logger.error(`User Added Payload received: `, payload);
 };
+
+export const logWebflowAuthRedirect = (payload: any) => {
+  logger.info(`Webflow auth redirect code: `, payload);
+};
+
+export const logWebhookResponse = (payload: any) => {
+  logger.info(`Webhook`, payload);
+};

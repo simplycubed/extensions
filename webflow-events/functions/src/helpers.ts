@@ -25,3 +25,8 @@ export const getDatabaseUrl = (
 
   return `https://${selectedDatabaseInstance}.${selectedDatabaseLocation}.firebasedatabase.app`;
 };
+
+// TODO: env FUNCTION_REGION and GCP_PROJECT are not available in newer function enviroments. Extension needs to set them explicitly
+export const getFunctionBaseUrl = () => {
+  return `https://${process.env.FUNCTION_REGION}-${process.env.GCP_PROJECT}.cloudfunctions.net`;
+};
