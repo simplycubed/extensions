@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import config from "./config";
 
 export const getDatabaseUrl = (
   selectedDatabaseInstance: string | undefined,
@@ -26,7 +27,6 @@ export const getDatabaseUrl = (
   return `https://${selectedDatabaseInstance}.${selectedDatabaseLocation}.firebasedatabase.app`;
 };
 
-// TODO: env FUNCTION_REGION and GCP_PROJECT are not available in newer function enviroments. Extension needs to set them explicitly
 export const getFunctionBaseUrl = () => {
-  return `https://${process.env.FUNCTION_REGION}-${process.env.GCP_PROJECT}.cloudfunctions.net`;
+  return `https://${config.location}-${config.projectId}.cloudfunctions.net`;
 };
