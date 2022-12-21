@@ -22,4 +22,7 @@ export default {
   selectedDatabaseLocation: process.env.SELECTED_DATABASE_LOCATION,
   userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
   storageUserPath: process.env.STORAGE_USER_PATH,
+  webflowAppClientID: process.env.WEBFLOW_APP_CLIENT_ID,
+  webflowAppClientSecret: process.env.WEBFLOW_APP_CLIENT_SECRET,
+  webflowSiteID: process.env.WEBFLOW_SITE_ID,
 };
