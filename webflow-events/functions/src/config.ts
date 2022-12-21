@@ -20,7 +20,7 @@ export default {
     process.env.CLOUD_STORAGE_BUCKET || process.env.STORAGE_BUCKET,
   selectedDatabaseInstance: process.env.SELECTED_DATABASE_INSTANCE,
   selectedDatabaseLocation: process.env.SELECTED_DATABASE_LOCATION,
-  userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
+  firestoreUserCollectionName: process.env.FIRESTORE_USER_COLLECTION_NAME,
   storageUserPath: process.env.STORAGE_USER_PATH,
   webflowAppClientID: process.env.WEBFLOW_APP_CLIENT_ID,
   webflowAppClientSecret: process.env.WEBFLOW_APP_CLIENT_SECRET,
