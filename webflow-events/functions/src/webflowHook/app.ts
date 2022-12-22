@@ -13,6 +13,7 @@ import { getFunctionBaseUrl } from "../helpers";
 import { triggerTypeEndpointMap } from "./types";
 import { createValidateWebflowSignatureMw } from "./validateWebflowSignature";
 import { json } from "body-parser";
+import { logger } from "firebase-functions";
 
 const webflow = new Webflow();
 
@@ -98,7 +99,7 @@ webhookApp.post(
   "/ecommNewOrder",
   validateWebflowSignatureMw,
   async (req, res) => {
-    console.log(req.body, req.headers);
+    logger.log(req.body, req.headers);
     res.status(500).json({ message: `not implemented` });
   }
 );
@@ -107,7 +108,7 @@ webhookApp.post(
   "/ecommOrderChanged",
   validateWebflowSignatureMw,
   async (req, res) => {
-    console.log(req.body, req.headers);
+    logger.log(req.body, req.headers);
     res.status(500).json({ message: `not implemented` });
   }
 );
@@ -116,7 +117,7 @@ webhookApp.post(
   "/ecommInventoryChanged",
   validateWebflowSignatureMw,
   async (req, res) => {
-    console.log(req.body, req.headers);
+    logger.log(req.body, req.headers);
     res.status(500).json({ message: `not implemented` });
   }
 );
@@ -125,7 +126,7 @@ webhookApp.post(
   "/collectionItemCreated",
   validateWebflowSignatureMw,
   async (req, res) => {
-    console.log(req.body, req.headers);
+    logger.log(req.body, req.headers);
     res.status(500).json({ message: `not implemented` });
   }
 );
@@ -134,7 +135,7 @@ webhookApp.post(
   "/collectionItemChanged",
   validateWebflowSignatureMw,
   async (req, res) => {
-    console.log(req.body, req.headers);
+    logger.log(req.body, req.headers);
     res.status(500).json({ message: `not implemented` });
   }
 );
@@ -143,12 +144,12 @@ webhookApp.post(
   "/collectionItemDeleted",
   validateWebflowSignatureMw,
   async (req, res) => {
-    console.log(req.body, req.headers);
+    logger.log(req.body, req.headers);
     res.status(500).json({ message: `not implemented` });
   }
 );
 
 webhookApp.post("/collectionItemUnpublished", async (req, res) => {
-  console.log(req.body, req.headers);
+  logger.log(req.body, req.headers);
   res.status(500).json({ message: `not implemented` });
 });
