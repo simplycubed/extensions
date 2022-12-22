@@ -20,7 +20,9 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logUserAddedPayload =
+exports.logWebhookResponse =
+  exports.logWebflowAuthRedirect =
+  exports.logUserAddedPayload =
   exports.customFunctionError =
   exports.init =
     void 0;
@@ -44,3 +46,11 @@ const logUserAddedPayload = (payload) => {
   firebase_functions_1.logger.error(`User Added Payload received: `, payload);
 };
 exports.logUserAddedPayload = logUserAddedPayload;
+const logWebflowAuthRedirect = (payload) => {
+  firebase_functions_1.logger.info(`Webflow auth redirect code: `, payload);
+};
+exports.logWebflowAuthRedirect = logWebflowAuthRedirect;
+const logWebhookResponse = (payload) => {
+  firebase_functions_1.logger.info(`Webhook`, payload);
+};
+exports.logWebhookResponse = logWebhookResponse;

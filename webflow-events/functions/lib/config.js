@@ -17,10 +17,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
   location: process.env.LOCATION,
+  projectId:
+    process.env.GCLOUD_PROJECT ||
+    process.env.GCP_PROJECT ||
+    process.env.PROJECT_ID,
   storageBucketDefault:
     process.env.CLOUD_STORAGE_BUCKET || process.env.STORAGE_BUCKET,
   selectedDatabaseInstance: process.env.SELECTED_DATABASE_INSTANCE,
   selectedDatabaseLocation: process.env.SELECTED_DATABASE_LOCATION,
   userCollectionPath: process.env.USER_COLLECTION_PATH || "users",
   storageUserPath: process.env.STORAGE_USER_PATH,
+  webflowAppClientID: process.env.WEBFLOW_APP_CLIENT_ID,
+  webflowAppClientSecret: process.env.WEBFLOW_APP_CLIENT_SECRET,
+  webflowSiteID: process.env.WEBFLOW_SITE_ID,
 };

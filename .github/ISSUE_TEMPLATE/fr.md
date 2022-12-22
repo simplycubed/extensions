@@ -16,7 +16,7 @@ To file a feature request that affects multiple extensions or the Firebase Exten
 
 ### [REQUIRED] Step 2: Extension name
 
-This feature request is for extension: **\_** (`webflow-memberships`, `extension2`, etc)
+This feature request is for extension: **\_** (`webflow-events`, `extension2`, etc)
 
 ### What feature would you like to see?
 

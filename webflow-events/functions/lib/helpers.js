@@ -1,4 +1,11 @@
 "use strict";
+var __importDefault =
+  (this && this.__importDefault) ||
+  function (mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getFunctionBaseUrl = exports.getDatabaseUrl = void 0;
 /*
  * Copyright 2022 Google LLC
  *
@@ -14,8 +21,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDatabaseUrl = void 0;
+const config_1 = __importDefault(require("./config"));
 const getDatabaseUrl = (selectedDatabaseInstance, selectedDatabaseLocation) => {
   if (!selectedDatabaseLocation || !selectedDatabaseInstance) return null;
   if (selectedDatabaseLocation === "us-central1")
@@ -23,3 +29,7 @@ const getDatabaseUrl = (selectedDatabaseInstance, selectedDatabaseLocation) => {
   return `https://${selectedDatabaseInstance}.${selectedDatabaseLocation}.firebasedatabase.app`;
 };
 exports.getDatabaseUrl = getDatabaseUrl;
+const getFunctionBaseUrl = () => {
+  return `https://${config_1.default.location}-${config_1.default.projectId}.cloudfunctions.net`;
+};
+exports.getFunctionBaseUrl = getFunctionBaseUrl;
