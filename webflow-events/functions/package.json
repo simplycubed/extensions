@@ -1,5 +1,5 @@
 {
-  "name": "webflow-memberships-functions",
+  "name": "webflow-events-functions",
   "description": "Automatically manage user data when it is added and changed in Webflow Memberships.",
   "main": "lib/index.js",
   "scripts": {

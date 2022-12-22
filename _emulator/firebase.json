@@ -1,6 +1,6 @@
 {
   "extensions": {
-    "webflow-memberships": "../webflow-memberships"
+    "webflow-events": "../webflow-events"
   },
   "storage": {
     "rules": "storage.rules"
