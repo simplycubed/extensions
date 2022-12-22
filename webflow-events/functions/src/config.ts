@@ -16,6 +16,10 @@
 
 export default {
   location: process.env.LOCATION,
+  projectId:
+    process.env.GCLOUD_PROJECT ||
+    process.env.GCP_PROJECT ||
+    process.env.PROJECT_ID,
   storageBucketDefault:
     process.env.CLOUD_STORAGE_BUCKET || process.env.STORAGE_BUCKET,
   selectedDatabaseInstance: process.env.SELECTED_DATABASE_INSTANCE,
