@@ -11,13 +11,22 @@ import { firstoreDb, storage } from "../init";
 import config from "../config";
 import { getFunctionBaseUrl } from "../helpers";
 import { triggerTypeEndpointMap } from "./types";
+import { createValidateWebflowSignatureMw } from "./validateWebflowSignature";
+import { json } from "body-parser";
 
 const webflow = new Webflow();
+
+const validateWebflowSignatureMw = createValidateWebflowSignatureMw(
+  config.webflowAppClientSecret
+);
 
 export const webhookApp = express();
 
 // attach logger middleware
 webhookApp.use(morgan("tiny"));
+
+// body parser
+webhookApp.use(json());
 
 // error middleware
 webhookApp.use((error: any, req: any, res: any, next: any) => {
@@ -66,46 +75,78 @@ webhookApp.get("/auth-success", async (req, res) => {
 });
 
 // Webflow Hooks
-webhookApp.post("/membershipsUserAccountAdded", async (req, res) => {
-  logUserAddedPayload(req.body);
-  await handleMembershipsUserAccountAdded(firstoreDb, storage, req.body);
-  res.status(200).json({ status: `done` });
-});
+webhookApp.post(
+  "/membershipsUserAccountAdded",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    logUserAddedPayload(req.body);
+    await handleMembershipsUserAccountAdded(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `done` });
+  }
+);
 
-webhookApp.post("/membershipsUserAccountUpdated", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/membershipsUserAccountUpdated",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
-webhookApp.post("/ecommNewOrder", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/ecommNewOrder",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
-webhookApp.post("/ecommOrderChanged", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/ecommOrderChanged",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
-webhookApp.post("/ecommInventoryChanged", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/ecommInventoryChanged",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
-webhookApp.post("/collectionItemCreated", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/collectionItemCreated",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
-webhookApp.post("/collectionItemChanged", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/collectionItemChanged",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
-webhookApp.post("/collectionItemDeleted", async (req, res) => {
-  console.log(req.body, req.headers);
-  res.status(500).json({ message: `not implemented` });
-});
+webhookApp.post(
+  "/collectionItemDeleted",
+  validateWebflowSignatureMw,
+  async (req, res) => {
+    console.log(req.body, req.headers);
+    res.status(500).json({ message: `not implemented` });
+  }
+);
 
 webhookApp.post("/collectionItemUnpublished", async (req, res) => {
   console.log(req.body, req.headers);
