@@ -40,11 +40,17 @@ billingRequired: true
 
 roles:
   - role: datastore.owner
-    reason: Allows the extension to delete (user) data from Cloud Firestore.
+    reason:
+      Allows the extension to create, update and delete (user) data from Cloud
+      Firestore.
   - role: firebasedatabase.admin
-    reason: Allows the extension to delete (user) data from Realtime Database.
+    reason:
+      Allows the extension to create, update and delete (user) data from
+      Realtime Database.
   - role: storage.admin
-    reason: Allows the extension to delete (user) data from Cloud Storage.
+    reason:
+      Allows the extension to create, update and delete (user) data from Cloud
+      Storage.
 
 resources:
   - name: webflowHook
@@ -179,9 +185,9 @@ params:
     required: true
 
   - param: WEBFLOW_APP_CLIENT_SECRET
-    label: Client Secret of the webflow app from which hooks will be  created.
+    label: Client secret of the webflow app from which hooks will be  created.
     description: >-
-      Client Secret of the webflow app from which hooks will be  created.
+      Client secret of the webflow app from which hooks will be  created.
     type: string
     example: 72811beacf8e996ba762b6c4ea7b9027
     required: true
