@@ -15,6 +15,7 @@
  */
 
 export default {
+  debug: process.env.DEBUG === "true" || process.env.DEBUG == "1",
   location: process.env.LOCATION,
   projectId:
     process.env.GCLOUD_PROJECT ||
