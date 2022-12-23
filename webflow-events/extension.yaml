@@ -180,7 +180,7 @@ params:
     label: Client ID of the webflow app from which hooks will be created.
     description: >-
       Client ID of the webflow app from which hooks will be  created.
-    type: string
+    type: secret
     example: 5af48d73b096a6712c70f11483130
     required: true
 
@@ -188,7 +188,7 @@ params:
     label: Client secret of the webflow app from which hooks will be  created.
     description: >-
       Client secret of the webflow app from which hooks will be  created.
-    type: string
+    type: secret
     example: 72811beacf8e996ba762b6c4ea7b9027
     required: true
 
