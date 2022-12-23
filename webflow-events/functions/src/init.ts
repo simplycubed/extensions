@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 import config from "./config";
 import { getDatabaseUrl } from "./helpers";
-import * as logs from "./logs";
+import * as logs from "./logger";
 
 // Helper function for selecting correct domain adrress
 export const databaseURL = getDatabaseUrl(
@@ -18,4 +18,3 @@ admin.initializeApp({
 export const firstoreDb = admin.firestore();
 export const database = admin.database();
 export const storage = admin.storage();
-logs.init();

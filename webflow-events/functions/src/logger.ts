@@ -17,22 +17,20 @@
 import { logger } from "firebase-functions";
 import config from "./config";
 
-export const init = () => {
-  logger.log("Initializing extension with configuration", config);
+export const info = (...params) => {
+  if (config.debug) {
+    logger.info(...params);
+  }
 };
 
-export const customFunctionError = (err: Error) => {
-  logger.error(`Call to custom hook function threw an error`, err);
+export const error = (...params) => {
+  if (config.debug) {
+    logger.error(...params);
+  }
 };
 
-export const logUserAddedPayload = (payload: any) => {
-  logger.error(`User Added Payload received: `, payload);
-};
-
-export const logWebflowAuthRedirect = (payload: any) => {
-  logger.info(`Webflow auth redirect code: `, payload);
-};
-
-export const logWebhookResponse = (payload: any) => {
-  logger.info(`Webhook`, payload);
+export const log = (...params) => {
+  if (config.debug) {
+    logger.log(...params);
+  }
 };
