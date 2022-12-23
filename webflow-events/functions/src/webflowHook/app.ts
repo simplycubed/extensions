@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import Webflow from "webflow-api";
 import * as logger from "../logger";
-import { handleMembershipsUserAccountAdded } from "./handler";
+import * as handlers from "./handler";
 import { firstoreDb, storage } from "../init";
 import config from "../config";
 import { getFunctionBaseUrl } from "../helpers";
@@ -76,8 +76,12 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handleMembershipsUserAccountAdded(firstoreDb, storage, req.body);
-    res.status(200).json({ status: `done` });
+    await handlers.handleMembershipsUserAccountAdded(
+      firstoreDb,
+      storage,
+      req.body
+    );
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -86,7 +90,12 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleMembershipsUserAccountUpdated(
+      firstoreDb,
+      storage,
+      req.body
+    );
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -95,7 +104,8 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleEcommNewOrder(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -104,7 +114,8 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleEcommOrderUpdated(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -113,7 +124,8 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleEcommInventoryChanged(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -122,7 +134,8 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleCollectionItemCreated(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -131,7 +144,8 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleCollectionItemChanged(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `success` });
   }
 );
 
@@ -140,11 +154,13 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    res.status(500).json({ message: `not implemented` });
+    await handlers.handleCollectionItemDeleted(firstoreDb, storage, req.body);
+    res.status(200).json({ status: `success` });
   }
 );
 
 webhookApp.post("/collectionItemUnpublished", async (req, res) => {
   logger.info("payload", req.body);
-  res.status(500).json({ message: `not implemented` });
+  await handlers.handleCollectionItemUnpublished(firstoreDb, storage, req.body);
+  res.status(200).json({ status: `success` });
 });
