@@ -12,7 +12,7 @@ export const handleMembershipsUserAccountAdded = async (
   payload: UserAccountAddedPayload
 ) => {
   await db
-    .collection(config.userCollectionPath)
+    .collection(config.firestoreUserCollectionName)
     .doc(payload._id)
     .set(payload, { merge: true });
 
