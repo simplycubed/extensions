@@ -12,8 +12,6 @@ template_path=.github/ISSUE_TEMPLATE/fr.md
 
 Issues filed here should be about a feature request for a **specific extension in this repository**.
 
-To file a feature request that affects multiple extensions or the Firebase Extensions platform, please reach out to [Firebase support](https://firebase.google.com/support/troubleshooter/report/features/) directly.
-
 ### [REQUIRED] Step 2: Extension name
 
 This feature request is for extension: **\_** (`webflow-events`, `extension2`, etc)
