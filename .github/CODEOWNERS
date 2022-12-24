@@ -1,9 +1,1 @@
-# Dependencies, package.json and mono-repo files
-package.json     @extensions
-*/package.json   @extensions
-lerna.json       @extensions
-
-# Tests
-jest.config.js   @extensions
-*/jest.config.js @extensions
-__tests__/*      @extensions
+@simplycubed/extensions
