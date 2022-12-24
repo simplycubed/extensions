@@ -1,8 +1,8 @@
-# Webflow Memberships
+# Webflow Events
 
 **Author**: SimplyCubed
 
-**Description:** Webflow Memberships creates and updates users in Google Firebase (Firestore, Realtime Database, and/or Storage) from Webflow Memberships events.
+**Description:** Webflow Events creates and updates form submissions, site publishing, ecommerce orders and inventory, memberships, and collection items in Google Firebase (Firestore, Realtime Database, and/or Storage) from [Webflow available events](https://developers.webflow.com/docs/available-events).
 
 ## Disclaimer
 
