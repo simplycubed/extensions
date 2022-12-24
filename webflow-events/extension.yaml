@@ -182,16 +182,16 @@ params:
       To which collection should the order events sync to? Leave empty if you
       don't want to sync order events.
     type: string
-    example: users
+    example: orders
     required: false
 
   - param: ORDER_STORAGE_PATH
-    label: Cloud Storage path for storing users
+    label: Cloud Storage path for storing orders
     description: >-
       To which collection should the order events sync to? Leave empty if you
       don't want to sync order events.
     type: string
-    example: users
+    example: orders
     required: false
 
   - param: INVENTORY_FIRESTORE_PATH
@@ -200,16 +200,16 @@ params:
       To which collection should the inventory events sync to? Leave empty if
       you don't want to sync inventory events.
     type: string
-    example: users
+    example: inventory
     required: false
 
   - param: INVENTORY_STORAGE_PATH
-    label: Cloud Storage path for storing users
+    label: Cloud Storage path for storing inventory
     description: >-
       To which collection should the inventory events sync to? Leave empty if
       you don't want to sync inventory events.
     type: string
-    example: users
+    example: inventory
     required: false
 
   - param: COLLECTION_ITEM_FIRESTORE_PATH
@@ -218,7 +218,7 @@ params:
       To which collection should the collection items events sync to? Leave
       empty if you don't want to sync collection items events.
     type: string
-    example: users
+    example: collection-items
     required: false
 
   - param: COLLECTION_ITEM_STORAGE_PATH
@@ -227,7 +227,7 @@ params:
       To which collection should the collection items events sync to? Leave
       empty if you don't want to sync collection items events.
     type: string
-    example: users
+    example: collection-items
     required: false
 
   - param: WEBFLOW_APP_CLIENT_ID
