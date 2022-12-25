@@ -14,6 +14,60 @@ export interface UserAccountAddedPayload {
   };
 }
 
+export interface UserAccountUpdatedPayload {
+  _id: string;
+  createdOn: string;
+  updatedOn: string;
+  emailVerified: boolean;
+  status: string;
+  invitedOn?: string;
+  lastLogin?: string;
+  data: {
+    "accept-privacy": boolean;
+    "accept-communications": boolean;
+    email: string;
+    name: string;
+  };
+}
+
+export interface EcommNewOrder {
+  orderId: string;
+  [key: string]: any;
+}
+
+export interface EcommOrderChanged {
+  orderId: string;
+  [key: string]: any;
+}
+
+export interface EcommInventoryChanged {
+  _id: string;
+  quantity: number;
+  inventoryType: "finite" | "infinite";
+}
+
+export interface CollectionItemCreated {
+  _cid: string;
+  _id: string;
+  [key: string]: any;
+}
+
+export interface CollectionItemChanged {
+  _cid: string;
+  _id: string;
+  [key: string]: any;
+}
+
+export interface CollectionItemDeleted {
+  deleted: number;
+  itemId: string;
+}
+
+export interface CollectionItemUnpublished {
+  deleted: number;
+  itemId: string;
+}
+
 export enum TriggerType {
   memberships_user_account_added = "memberships_user_account_added",
   memberships_user_account_updated = "memberships_user_account_updated",

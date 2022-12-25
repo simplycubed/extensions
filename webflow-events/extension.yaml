@@ -158,7 +158,7 @@ params:
     default: ${STORAGE_BUCKET}
     required: true
 
-  - param: FIRESTORE_USER_COLLECTION_NAME
+  - param: USER_FIRESTORE_PATH
     label: Cloud Firestore collection path for storing users
     description: >-
       To which collection should the user events sync to? Leave empty if you
@@ -167,13 +167,67 @@ params:
     example: users
     required: false
 
-  - param: STORAGE_USER_PATH
+  - param: USER_STORAGE_PATH
     label: Cloud Storage path for storing users
     description: >-
       To which collection should the user events sync to? Leave empty if you
       don't want to sync user membership events.
     type: string
     example: users
+    required: false
+
+  - param: ORDER_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing orders
+    description: >-
+      To which collection should the order events sync to? Leave empty if you
+      don't want to sync order events.
+    type: string
+    example: orders
+    required: false
+
+  - param: ORDER_STORAGE_PATH
+    label: Cloud Storage path for storing orders
+    description: >-
+      To which collection should the order events sync to? Leave empty if you
+      don't want to sync order events.
+    type: string
+    example: orders
+    required: false
+
+  - param: INVENTORY_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing inventory
+    description: >-
+      To which collection should the inventory events sync to? Leave empty if
+      you don't want to sync inventory events.
+    type: string
+    example: inventory
+    required: false
+
+  - param: INVENTORY_STORAGE_PATH
+    label: Cloud Storage path for storing inventory
+    description: >-
+      To which collection should the inventory events sync to? Leave empty if
+      you don't want to sync inventory events.
+    type: string
+    example: inventory
+    required: false
+
+  - param: COLLECTION_ITEM_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing collection items
+    description: >-
+      To which collection should the collection items events sync to? Leave
+      empty if you don't want to sync collection items events.
+    type: string
+    example: collection-items
+    required: false
+
+  - param: COLLECTION_ITEM_STORAGE_PATH
+    label: Cloud Storage path for storing collection items
+    description: >-
+      To which collection should the collection items events sync to? Leave
+      empty if you don't want to sync collection items events.
+    type: string
+    example: collection-items
     required: false
 
   - param: WEBFLOW_APP_CLIENT_ID

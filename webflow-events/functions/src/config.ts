@@ -25,8 +25,18 @@ export default {
     process.env.CLOUD_STORAGE_BUCKET || process.env.STORAGE_BUCKET,
   selectedDatabaseInstance: process.env.SELECTED_DATABASE_INSTANCE,
   selectedDatabaseLocation: process.env.SELECTED_DATABASE_LOCATION,
-  firestoreUserCollectionName: process.env.FIRESTORE_USER_COLLECTION_NAME,
-  storageUserPath: process.env.STORAGE_USER_PATH,
+
+  // paths
+  userFirestorePath: process.env.USER_FIRESTORE_PATH,
+  userStoragePath: process.env.USER_STORAGE_PATH,
+  orderFirestorePath: process.env.ORDER_FIRESTORE_PATH,
+  orderStoragePath: process.env.ORDER_STORAGE_PATH,
+  inventoryFirestorePath: process.env.INVENTORY_FIRESTORE_PATH,
+  inventoryStoragePath: process.env.INVENTORY_STORAGE_PATH,
+  collectionItemFirestorePath: process.env.COLLECTION_ITEM_FIRESTORE_PATH,
+  collectionItemStoragePath: process.env.COLLECTION_ITEM_STORAGE_PATH,
+
+  // Webflow credentials
   webflowAppClientID: process.env.WEBFLOW_APP_CLIENT_ID,
   webflowAppClientSecret: process.env.WEBFLOW_APP_CLIENT_SECRET,
   webflowSiteID: process.env.WEBFLOW_SITE_ID,
