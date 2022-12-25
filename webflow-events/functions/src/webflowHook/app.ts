@@ -164,3 +164,15 @@ webhookApp.post("/collectionItemUnpublished", async (req, res) => {
   await handlers.handleCollectionItemUnpublished(firstoreDb, storage, req.body);
   res.status(200).json({ status: `success` });
 });
+
+webhookApp.post("/formSubmission", async (req, res) => {
+  logger.info("payload", req.body);
+  await handlers.handleFormSubmission(firstoreDb, storage, req.body);
+  res.status(200).json({ status: `success` });
+});
+
+webhookApp.post("/sitePublish", async (req, res) => {
+  logger.info("payload", req.body);
+  await handlers.handleSitePublish(firstoreDb, storage, req.body);
+  res.status(200).json({ status: `success` });
+});

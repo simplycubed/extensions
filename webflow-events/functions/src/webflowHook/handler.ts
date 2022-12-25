@@ -8,6 +8,8 @@ import {
   EcommInventoryChanged,
   EcommNewOrder,
   EcommOrderChanged,
+  FormSubmissionPayload,
+  SitePublishPayload,
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
 } from "./types";
@@ -49,6 +51,26 @@ async function writeCollectionItemToFirestore(
   return db
     .collection(config.collectionItemFirestorePath)
     .doc(payload._id)
+    .set(payload, { merge: true });
+}
+
+async function writeFormSubmissionToFirestore(
+  db: firestore.Firestore,
+  payload: FormSubmissionPayload
+) {
+  return db
+    .collection(config.formSubmissionFirstorePath)
+    .doc(payload._id)
+    .set(payload, { merge: true });
+}
+
+async function writeSitePublishToFirestore(
+  db: firestore.Firestore,
+  payload: SitePublishPayload
+) {
+  return db
+    .collection(config.sitePublishFirestorePath)
+    .doc(payload.site)
     .set(payload, { merge: true });
 }
 
@@ -100,6 +122,28 @@ async function writeCollectionItemToStorage(
   return storage
     .bucket(config.storageBucketDefault)
     .file(`${config.collectionItemStoragePath}/${payload._id}.json`)
+    .save(fileContents, { validation: false });
+}
+
+async function writeFormSubmissionToStorage(
+  storage: storage.Storage,
+  payload: FormSubmissionPayload
+) {
+  const fileContents = JSON.stringify(payload);
+  return storage
+    .bucket(config.storageBucketDefault)
+    .file(`${config.formSubmissionStoragePath}/${payload._id}.json`)
+    .save(fileContents, { validation: false });
+}
+
+async function writeSitePublishToStorage(
+  storage: storage.Storage,
+  payload: SitePublishPayload
+) {
+  const fileContents = JSON.stringify(payload);
+  return storage
+    .bucket(config.storageBucketDefault)
+    .file(`${config.sitePublishStoragePath}/${payload.site}.json`)
     .save(fileContents, { validation: false });
 }
 
@@ -278,5 +322,39 @@ export const handleCollectionItemUnpublished = async (
   if (config.collectionItemStoragePath) {
     // delete from storage
     await deleteCollectionItemFromStorage(storage, payload.itemId);
+  }
+};
+
+/*
+ * The handleFormSubmission function creates new form submission document in firestore, storage and database.
+ */
+export const handleFormSubmission = async (
+  db: firestore.Firestore,
+  storage: storage.Storage,
+  payload: FormSubmissionPayload
+) => {
+  if (config.formSubmissionFirstorePath) {
+    await writeFormSubmissionToFirestore(db, payload);
+  }
+
+  if (config.formSubmissionStoragePath) {
+    await writeFormSubmissionToStorage(storage, payload);
+  }
+};
+
+/*
+ * The handleFormSubmission function creates new form submission document in firestore, storage and database.
+ */
+export const handleSitePublish = async (
+  db: firestore.Firestore,
+  storage: storage.Storage,
+  payload: SitePublishPayload
+) => {
+  if (config.sitePublishFirestorePath) {
+    await writeSitePublishToFirestore(db, payload);
+  }
+
+  if (config.sitePublishStoragePath) {
+    await writeSitePublishToStorage(storage, payload);
   }
 };
