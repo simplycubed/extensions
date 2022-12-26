@@ -5,6 +5,8 @@ import {
   CollectionItemCreated,
   EcommInventoryChanged,
   EcommNewOrder,
+  FormSubmissionPayload,
+  SitePublishPayload,
   UserAccountAddedPayload,
 } from "../src/webflowHook/types";
 import config from "../src/config";
@@ -26,6 +28,10 @@ jest.mock("../src/config", () => {
     inventoryStoragePath: "inventory",
     collectionItemFirestorePath: "collection-items",
     collectionItemStoragePath: "collection-items",
+    formSubmissionFirstorePath: "form-submissions",
+    formSubmissionStoragePath: "form-submissions",
+    sitePublishFirestorePath: "site-publish",
+    sitePublishStoragePath: "site-publish",
   };
 });
 
@@ -34,12 +40,15 @@ describe("Test handlers", () => {
   const orderId = "6287ec36a841b25637c66311";
   const inventoryItemId = "6287ec36a841b25637c66322";
   const collectionItemId = "6287ec36a841b25637c66333";
+  const formSubmissionId = "6287ec36a841b25637c66344";
+  const siteId = "6287ec36a841b25637c66355";
 
   beforeEach(async () => {
     await db.collection("users").doc(userId).delete();
     await db.collection("orders").doc(orderId).delete();
     await db.collection("inventory").doc(inventoryItemId).delete();
-    await db.collection("collection-items").doc(collectionItemId).delete();
+    await db.collection("form-submissions").doc(formSubmissionId).delete();
+    await db.collection("site-publish").doc(collectionItemId).delete();
     const [fileExists] = await storage
       .bucket(config.storageBucketDefault)
       .file(`${config.userStoragePath}/${userId}.json`)
@@ -78,6 +87,26 @@ describe("Test handlers", () => {
       await storage
         .bucket(config.storageBucketDefault)
         .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
+        .delete();
+    }
+    const [formSubmissionExists] = await storage
+      .bucket(config.storageBucketDefault)
+      .file(`${config.formSubmissionStoragePath}/${formSubmissionId}.json`)
+      .exists();
+    if (formSubmissionExists) {
+      await storage
+        .bucket(config.storageBucketDefault)
+        .file(`${config.formSubmissionStoragePath}/${formSubmissionId}.json`)
+        .delete();
+    }
+    const [sitePublishExists] = await storage
+      .bucket(config.storageBucketDefault)
+      .file(`${config.sitePublishStoragePath}/${siteId}.json`)
+      .exists();
+    if (sitePublishExists) {
+      await storage
+        .bucket(config.storageBucketDefault)
+        .file(`${config.sitePublishStoragePath}/${siteId}.json`)
         .delete();
     }
   });
@@ -273,5 +302,38 @@ describe("Test handlers", () => {
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .exists();
     expect(fileExists).toEqual([false]);
+  });
+
+  test("should create form submission in firestore", async () => {
+    await handlers.handleFormSubmission(db, storage, {
+      _id: formSubmissionId,
+    });
+    const formSubmission = await db
+      .collection("form-submissions")
+      .doc(formSubmissionId)
+      .get();
+    expect(formSubmission.exists).toBe(true);
+    const formSubmissionDoc = formSubmission.data() as FormSubmissionPayload;
+    expect(formSubmissionDoc._id).toBe(formSubmissionId);
+    const fileExists = await storage
+      .bucket(config.storageBucketDefault)
+      .file(`${config.formSubmissionStoragePath}/${formSubmissionId}.json`)
+      .exists();
+    expect(fileExists).toEqual([true]);
+  });
+
+  test("should update collection item in firestore", async () => {
+    await handlers.handleSitePublish(db, storage, {
+      site: siteId,
+    });
+    const site = await db.collection("site-publish").doc(siteId).get();
+    expect(site.exists).toBe(true);
+    const siteDoc = site.data() as SitePublishPayload;
+    expect(siteDoc.site).toBe(siteId);
+    const fileExists = await storage
+      .bucket(config.storageBucketDefault)
+      .file(`${config.sitePublishStoragePath}/${siteId}.json`)
+      .exists();
+    expect(fileExists).toEqual([true]);
   });
 });

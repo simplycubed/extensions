@@ -68,6 +68,16 @@ export interface CollectionItemUnpublished {
   itemId: string;
 }
 
+export interface FormSubmissionPayload {
+  _id: string;
+  [key: string]: any;
+}
+
+export interface SitePublishPayload {
+  site: string;
+  [key: string]: any;
+}
+
 export enum TriggerType {
   memberships_user_account_added = "memberships_user_account_added",
   memberships_user_account_updated = "memberships_user_account_updated",
@@ -78,6 +88,8 @@ export enum TriggerType {
   ecomm_new_order = "ecomm_new_order",
   ecomm_order_changed = "ecomm_order_changed",
   ecomm_inventory_changed = "ecomm_inventory_changed",
+  form_submission = "form_submission",
+  site_publish = "site_publish",
 }
 
 export const triggerTypeEndpointMap: { [triggerType in TriggerType]: string } =
@@ -92,4 +104,6 @@ export const triggerTypeEndpointMap: { [triggerType in TriggerType]: string } =
     [TriggerType.collection_item_changed]: "collectionItemChanged",
     [TriggerType.collection_item_deleted]: "collectionItemDeleted",
     [TriggerType.collection_item_unpublished]: "collectionItemUnpublished",
+    [TriggerType.form_submission]: "formSubmission",
+    [TriggerType.site_publish]: "sitePublish",
   };

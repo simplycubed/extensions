@@ -230,6 +230,42 @@ params:
     example: collection-items
     required: false
 
+  - param: FORM_SUBMISSION_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing form submissions
+    description: >-
+      To which collection should the form submissions events sync to? Leave
+      empty if you don't want to sync form submissions events.
+    type: string
+    example: form-submissions
+    required: false
+
+  - param: FORM_SUBMISSION_STORAGE_PATH
+    label: Cloud Storage path for storing collection form submissions
+    description: >-
+      To which collection should the form submissions events sync to? Leave
+      empty if you don't want to sync form submissions events.
+    type: string
+    example: form-submissions
+    required: false
+
+  - param: SITE_PUBLISH_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing site publish events
+    description: >-
+      To which collection should the site publish events sync to? Leave empty if
+      you don't want to sync site publish events.
+    type: string
+    example: site-publish
+    required: false
+
+  - param: SITE_PUBLISH_STORAGE_PATH
+    label: Cloud Storage path for storing collection site publish
+    description: >-
+      To which collection should the site publish events sync to? Leave empty if
+      you don't want to sync site publish events.
+    type: string
+    example: site-publish
+    required: false
+
   - param: WEBFLOW_APP_CLIENT_ID
     label: Client ID of the webflow app from which hooks will be created.
     description: >-

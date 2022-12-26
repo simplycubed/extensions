@@ -35,7 +35,10 @@ export default {
   inventoryStoragePath: process.env.INVENTORY_STORAGE_PATH,
   collectionItemFirestorePath: process.env.COLLECTION_ITEM_FIRESTORE_PATH,
   collectionItemStoragePath: process.env.COLLECTION_ITEM_STORAGE_PATH,
-
+  formSubmissionFirstorePath: process.env.FORM_SUBMISSION_FIRESTORE_PATH,
+  formSubmissionStoragePath: process.env.FORM_SUBMISSION_STORAGE_PATH,
+  sitePublishFirestorePath: process.env.SITE_PUBLISH_FIRESTORE_PATH,
+  sitePublishStoragePath: process.env.SITE_PUBLISH_STORAGE_PATH,
   // Webflow credentials
   webflowAppClientID: process.env.WEBFLOW_APP_CLIENT_ID,
   webflowAppClientSecret: process.env.WEBFLOW_APP_CLIENT_SECRET,
