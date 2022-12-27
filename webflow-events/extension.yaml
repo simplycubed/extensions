@@ -1,5 +1,3 @@
-# TODO: Update the following example with webflow-memberships Extension
-
 # Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,15 +39,15 @@ billingRequired: true
 roles:
   - role: datastore.owner
     reason:
-      Allows the extension to create, update and delete (user) data from Cloud
+      Allows the extension to create, update and delete user data from Cloud
       Firestore.
   - role: firebasedatabase.admin
     reason:
-      Allows the extension to create, update and delete (user) data from
-      Realtime Database.
+      Allows the extension to create, update and delete user data from Realtime
+      Database.
   - role: storage.admin
     reason:
-      Allows the extension to create, update and delete (user) data from Cloud
+      Allows the extension to create, update and delete user data from Cloud
       Storage.
 
 resources:
