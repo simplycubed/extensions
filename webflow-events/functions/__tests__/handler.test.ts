@@ -13,25 +13,35 @@ import config from "../src/config";
 
 setupEnvironment();
 
-admin.initializeApp();
+admin.initializeApp({
+  databaseURL: process.env.REALTIME_DATABASE_URL,
+});
+
 const db = admin.firestore();
 const storage = admin.storage();
+const realtimeDb = admin.database();
 
 jest.mock("../src/config", () => {
   return {
     storageBucketDefault: "test.appspot.com",
     userFirestorePath: "users",
+    userDatabasePath: "users",
     userStoragePath: "users",
     orderFirestorePath: "orders",
+    orderDatabasePath: "orders",
     orderStoragePath: "orders",
     inventoryFirestorePath: "inventory",
+    inventoryDatabasePath: "inventory",
     inventoryStoragePath: "inventory",
     collectionItemFirestorePath: "collection-items",
+    collectionItemDatabasePath: "collection-items",
     collectionItemStoragePath: "collection-items",
     formSubmissionFirstorePath: "form-submissions",
     formSubmissionStoragePath: "form-submissions",
+    formSubmissionDatabasePath: "form-submissions",
     sitePublishFirestorePath: "site-publish",
     sitePublishStoragePath: "site-publish",
+    sitePublishDatabasePath: "site-publish",
   };
 });
 
@@ -49,6 +59,21 @@ describe("Test handlers", () => {
     await db.collection("inventory").doc(inventoryItemId).delete();
     await db.collection("form-submissions").doc(formSubmissionId).delete();
     await db.collection("site-publish").doc(collectionItemId).delete();
+    await db.collection("collection-items").doc(collectionItemId).delete();
+    await realtimeDb.ref(`${config.userDatabasePath}/${userId}`).remove();
+    await realtimeDb.ref(`${config.orderDatabasePath}/${orderId}`).remove();
+    await realtimeDb
+      .ref(`${config.inventoryDatabasePath}/${inventoryItemId}`)
+      .remove();
+    await realtimeDb
+      .ref(`${config.collectionItemDatabasePath}/${collectionItemId}`)
+      .remove();
+    await realtimeDb
+      .ref(`${config.sitePublishDatabasePath}/${siteId}`)
+      .remove();
+    await realtimeDb
+      .ref(`${config.formSubmissionDatabasePath}/${formSubmissionId}`)
+      .remove();
     const [fileExists] = await storage
       .bucket(config.storageBucketDefault)
       .file(`${config.userStoragePath}/${userId}.json`)
@@ -110,8 +135,9 @@ describe("Test handlers", () => {
         .delete();
     }
   });
+
   test("should create user document in firestore", async () => {
-    await handlers.handleMembershipsUserAccountAdded(db, storage, {
+    await handlers.handleMembershipsUserAccountAdded(db, storage, realtimeDb, {
       _id: userId,
       createdOn: "2022-05-20T13:46:12.093Z",
       updatedOn: "2022-05-20T13:46:12.093Z",
@@ -134,22 +160,31 @@ describe("Test handlers", () => {
       .file(`${config.userStoragePath}/${userId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.userDatabasePath}/${userId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should update user document in firestore", async () => {
-    await handlers.handleMembershipsUserAccountUpdated(db, storage, {
-      _id: userId,
-      createdOn: "2022-05-20T13:46:12.093Z",
-      updatedOn: "2022-05-20T13:46:12.093Z",
-      emailVerified: true,
-      status: "verified",
-      data: {
-        "accept-privacy": false,
-        "accept-communications": false,
-        email: "Some.One@home.com",
-        name: "Some One",
-      },
-    });
+    await handlers.handleMembershipsUserAccountUpdated(
+      db,
+      storage,
+      realtimeDb,
+      {
+        _id: userId,
+        createdOn: "2022-05-20T13:46:12.093Z",
+        updatedOn: "2022-05-20T13:46:12.093Z",
+        emailVerified: true,
+        status: "verified",
+        data: {
+          "accept-privacy": false,
+          "accept-communications": false,
+          email: "Some.One@home.com",
+          name: "Some One",
+        },
+      }
+    );
     const user = await db.collection("users").doc(userId).get();
     expect(user.exists).toBe(true);
     const userDoc = user.data() as UserAccountAddedPayload;
@@ -160,10 +195,14 @@ describe("Test handlers", () => {
       .file(`${config.userStoragePath}/${userId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.userDatabasePath}/${userId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should create order document in firestore", async () => {
-    await handlers.handleEcommNewOrder(db, storage, {
+    await handlers.handleEcommNewOrder(db, storage, realtimeDb, {
       orderId: orderId,
     });
     const order = await db.collection("orders").doc(orderId).get();
@@ -175,10 +214,14 @@ describe("Test handlers", () => {
       .file(`${config.orderStoragePath}/${orderId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.orderDatabasePath}/${orderId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should update order document in firestore", async () => {
-    await handlers.handleEcommOrderUpdated(db, storage, {
+    await handlers.handleEcommOrderUpdated(db, storage, realtimeDb, {
       orderId: orderId,
     });
     const order = await db.collection("orders").doc(orderId).get();
@@ -190,10 +233,14 @@ describe("Test handlers", () => {
       .file(`${config.orderStoragePath}/${orderId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.orderDatabasePath}/${orderId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should update inventory in firestore", async () => {
-    await handlers.handleEcommInventoryChanged(db, storage, {
+    await handlers.handleEcommInventoryChanged(db, storage, realtimeDb, {
       inventoryType: "finite",
       _id: inventoryItemId,
       quantity: 10,
@@ -210,10 +257,14 @@ describe("Test handlers", () => {
       .file(`${config.inventoryStoragePath}/${inventoryItemId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.inventoryDatabasePath}/${inventoryItemId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should create collection item in firestore", async () => {
-    await handlers.handleCollectionItemCreated(db, storage, {
+    await handlers.handleCollectionItemCreated(db, storage, realtimeDb, {
       _cid: "test-id",
       _id: collectionItemId,
     });
@@ -229,10 +280,14 @@ describe("Test handlers", () => {
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.collectionItemDatabasePath}/${collectionItemId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should update collection item in firestore", async () => {
-    await handlers.handleCollectionItemChanged(db, storage, {
+    await handlers.handleCollectionItemChanged(db, storage, realtimeDb, {
       _cid: "test-id",
       _id: collectionItemId,
     });
@@ -248,6 +303,10 @@ describe("Test handlers", () => {
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.collectionItemStoragePath}/${collectionItemId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should delete collection item in firestore", async () => {
@@ -260,8 +319,9 @@ describe("Test handlers", () => {
       .bucket(config.storageBucketDefault)
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .save("test-file-contents", { validation: false });
+    await db.collection("collection-items").doc(collectionItemId).set({});
 
-    await handlers.handleCollectionItemDeleted(db, storage, {
+    await handlers.handleCollectionItemDeleted(db, storage, realtimeDb, {
       itemId: collectionItemId,
       deleted: 1,
     });
@@ -275,6 +335,10 @@ describe("Test handlers", () => {
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .exists();
     expect(fileExists).toEqual([false]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.collectionItemStoragePath}/${collectionItemId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(false);
   });
 
   test("should delete collection item when item is unpublished", async () => {
@@ -288,7 +352,7 @@ describe("Test handlers", () => {
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .save("test-file-contents", { validation: false });
 
-    await handlers.handleCollectionItemUnpublished(db, storage, {
+    await handlers.handleCollectionItemUnpublished(db, storage, realtimeDb, {
       itemId: collectionItemId,
       deleted: 1,
     });
@@ -302,10 +366,14 @@ describe("Test handlers", () => {
       .file(`${config.collectionItemStoragePath}/${collectionItemId}.json`)
       .exists();
     expect(fileExists).toEqual([false]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.collectionItemStoragePath}/${collectionItemId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(false);
   });
 
   test("should create form submission in firestore", async () => {
-    await handlers.handleFormSubmission(db, storage, {
+    await handlers.handleFormSubmission(db, storage, realtimeDb, {
       _id: formSubmissionId,
     });
     const formSubmission = await db
@@ -320,10 +388,14 @@ describe("Test handlers", () => {
       .file(`${config.formSubmissionStoragePath}/${formSubmissionId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.formSubmissionDatabasePath}/${formSubmissionId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 
   test("should update collection item in firestore", async () => {
-    await handlers.handleSitePublish(db, storage, {
+    await handlers.handleSitePublish(db, storage, realtimeDb, {
       site: siteId,
     });
     const site = await db.collection("site-publish").doc(siteId).get();
@@ -335,5 +407,9 @@ describe("Test handlers", () => {
       .file(`${config.sitePublishStoragePath}/${siteId}.json`)
       .exists();
     expect(fileExists).toEqual([true]);
+    const rtDoc = await realtimeDb
+      .ref(`${config.sitePublishDatabasePath}/${siteId}`)
+      .get();
+    expect(rtDoc.exists()).toBe(true);
   });
 });

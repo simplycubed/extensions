@@ -1,4 +1,4 @@
-import { firestore, storage } from "firebase-admin";
+import { firestore, storage, database } from "firebase-admin";
 import config from "../config";
 import {
   CollectionItemChanged,
@@ -24,6 +24,15 @@ async function writeUserToFirestore(
     .set(payload, { merge: true });
 }
 
+async function writeUserToDatabase(
+  realtimeDb: database.Database,
+  payload: UserAccountAddedPayload
+) {
+  return realtimeDb
+    .ref(`${config.userDatabasePath}/${payload._id}`)
+    .set(payload);
+}
+
 async function writeOrderToFirestore(
   db: firestore.Firestore,
   payload: EcommNewOrder | EcommOrderChanged
@@ -34,6 +43,15 @@ async function writeOrderToFirestore(
     .set(payload, { merge: true });
 }
 
+async function writeOrderToDatabase(
+  realtimeDb: database.Database,
+  payload: EcommNewOrder | EcommOrderChanged
+) {
+  return realtimeDb
+    .ref(`${config.orderDatabasePath}/${payload.orderId}`)
+    .set(payload);
+}
+
 async function writeInventoryToFirestore(
   db: firestore.Firestore,
   payload: EcommInventoryChanged
@@ -42,6 +60,15 @@ async function writeInventoryToFirestore(
     .collection(config.inventoryFirestorePath)
     .doc(payload._id)
     .set(payload, { merge: true });
+}
+
+async function writeInventoryToDatabase(
+  realtimeDb: database.Database,
+  payload: EcommInventoryChanged
+) {
+  return realtimeDb
+    .ref(`${config.inventoryDatabasePath}/${payload._id}`)
+    .set(payload);
 }
 
 async function writeCollectionItemToFirestore(
@@ -74,11 +101,27 @@ async function writeSitePublishToFirestore(
     .set(payload, { merge: true });
 }
 
+async function writeCollectionItemToDatabase(
+  realtimeDb: database.Database,
+  payload: CollectionItemCreated
+) {
+  return realtimeDb
+    .ref(`${config.collectionItemDatabasePath}/${payload._id}`)
+    .set(payload);
+}
+
 async function deleteCollectionItemFromFirestore(
   db: firestore.Firestore,
   _id: string
 ) {
   return db.collection(config.collectionItemFirestorePath).doc(_id).delete();
+}
+
+async function deleteCollectionItemFromDatabase(
+  realtimeDb: database.Database,
+  _id: string
+) {
+  return realtimeDb.ref(`${config.collectionItemDatabasePath}/${_id}`).remove();
 }
 
 async function writeInventoryToStorage(
@@ -136,6 +179,15 @@ async function writeFormSubmissionToStorage(
     .save(fileContents, { validation: false });
 }
 
+async function writeFormSubmissionToDatabase(
+  realtimeDb: database.Database,
+  payload: FormSubmissionPayload
+) {
+  return realtimeDb
+    .ref(`${config.formSubmissionDatabasePath}/${payload._id}`)
+    .set(payload);
+}
+
 async function writeSitePublishToStorage(
   storage: storage.Storage,
   payload: SitePublishPayload
@@ -145,6 +197,15 @@ async function writeSitePublishToStorage(
     .bucket(config.storageBucketDefault)
     .file(`${config.sitePublishStoragePath}/${payload.site}.json`)
     .save(fileContents, { validation: false });
+}
+
+async function writeSitePublishToDatabase(
+  realtimeDb: database.Database,
+  payload: SitePublishPayload
+) {
+  return realtimeDb
+    .ref(`${config.sitePublishDatabasePath}/${payload.site}`)
+    .set(payload);
 }
 
 async function deleteCollectionItemFromStorage(
@@ -163,6 +224,7 @@ async function deleteCollectionItemFromStorage(
 export const handleMembershipsUserAccountAdded = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: UserAccountAddedPayload
 ) => {
   if (config.userFirestorePath) {
@@ -174,6 +236,10 @@ export const handleMembershipsUserAccountAdded = async (
     // sync to storage
     await writeUserToStorage(storage, payload);
   }
+
+  if (config.userDatabasePath) {
+    await writeUserToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -182,6 +248,7 @@ export const handleMembershipsUserAccountAdded = async (
 export const handleMembershipsUserAccountUpdated = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: UserAccountUpdatedPayload
 ) => {
   if (config.userFirestorePath) {
@@ -193,6 +260,10 @@ export const handleMembershipsUserAccountUpdated = async (
     // sync to storage
     await writeUserToStorage(storage, payload);
   }
+
+  if (config.userDatabasePath) {
+    await writeUserToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -201,6 +272,7 @@ export const handleMembershipsUserAccountUpdated = async (
 export const handleEcommNewOrder = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: EcommNewOrder
 ) => {
   if (config.userFirestorePath) {
@@ -212,6 +284,10 @@ export const handleEcommNewOrder = async (
     // sync to storage
     await writeOrderToStorage(storage, payload);
   }
+
+  if (config.orderDatabasePath) {
+    await writeOrderToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -220,6 +296,7 @@ export const handleEcommNewOrder = async (
 export const handleEcommOrderUpdated = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: EcommNewOrder
 ) => {
   if (config.orderFirestorePath) {
@@ -231,6 +308,10 @@ export const handleEcommOrderUpdated = async (
     // sync to storage
     await writeOrderToStorage(storage, payload);
   }
+
+  if (config.orderDatabasePath) {
+    await writeOrderToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -239,6 +320,7 @@ export const handleEcommOrderUpdated = async (
 export const handleEcommInventoryChanged = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: EcommInventoryChanged
 ) => {
   if (config.inventoryFirestorePath) {
@@ -250,11 +332,16 @@ export const handleEcommInventoryChanged = async (
     // sync to storage
     await writeInventoryToStorage(storage, payload);
   }
+
+  if (config.inventoryDatabasePath) {
+    await writeInventoryToDatabase(realtimeDb, payload);
+  }
 };
 
 export const handleCollectionItemCreated = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: CollectionItemCreated
 ) => {
   if (config.collectionItemFirestorePath) {
@@ -266,6 +353,10 @@ export const handleCollectionItemCreated = async (
     // sync to storage
     await writeCollectionItemToStorage(storage, payload);
   }
+
+  if (config.collectionItemDatabasePath) {
+    await writeCollectionItemToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -274,6 +365,7 @@ export const handleCollectionItemCreated = async (
 export const handleCollectionItemChanged = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: CollectionItemChanged
 ) => {
   if (config.collectionItemFirestorePath) {
@@ -285,6 +377,10 @@ export const handleCollectionItemChanged = async (
     // sync to storage
     await writeCollectionItemToStorage(storage, payload);
   }
+
+  if (config.collectionItemDatabasePath) {
+    await writeCollectionItemToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -293,6 +389,7 @@ export const handleCollectionItemChanged = async (
 export const handleCollectionItemDeleted = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: CollectionItemDeleted
 ) => {
   if (config.collectionItemFirestorePath) {
@@ -304,6 +401,10 @@ export const handleCollectionItemDeleted = async (
     // delete from storage
     await deleteCollectionItemFromStorage(storage, payload.itemId);
   }
+
+  if (config.collectionItemDatabasePath) {
+    await deleteCollectionItemFromDatabase(realtimeDb, payload.itemId);
+  }
 };
 
 /*
@@ -312,6 +413,7 @@ export const handleCollectionItemDeleted = async (
 export const handleCollectionItemUnpublished = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: CollectionItemUnpublished
 ) => {
   if (config.collectionItemFirestorePath) {
@@ -323,6 +425,10 @@ export const handleCollectionItemUnpublished = async (
     // delete from storage
     await deleteCollectionItemFromStorage(storage, payload.itemId);
   }
+
+  if (config.collectionItemDatabasePath) {
+    await deleteCollectionItemFromDatabase(realtimeDb, payload.itemId);
+  }
 };
 
 /*
@@ -331,6 +437,7 @@ export const handleCollectionItemUnpublished = async (
 export const handleFormSubmission = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: FormSubmissionPayload
 ) => {
   if (config.formSubmissionFirstorePath) {
@@ -340,6 +447,10 @@ export const handleFormSubmission = async (
   if (config.formSubmissionStoragePath) {
     await writeFormSubmissionToStorage(storage, payload);
   }
+
+  if (config.formSubmissionDatabasePath) {
+    await writeFormSubmissionToDatabase(realtimeDb, payload);
+  }
 };
 
 /*
@@ -348,6 +459,7 @@ export const handleFormSubmission = async (
 export const handleSitePublish = async (
   db: firestore.Firestore,
   storage: storage.Storage,
+  realtimeDb: database.Database,
   payload: SitePublishPayload
 ) => {
   if (config.sitePublishFirestorePath) {
@@ -356,5 +468,9 @@ export const handleSitePublish = async (
 
   if (config.sitePublishStoragePath) {
     await writeSitePublishToStorage(storage, payload);
+  }
+
+  if (config.sitePublishDatabasePath) {
+    await writeSitePublishToDatabase(realtimeDb, payload);
   }
 };

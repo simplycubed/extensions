@@ -3,7 +3,7 @@ import morgan from "morgan";
 import Webflow from "webflow-api";
 import * as logger from "../logger";
 import * as handlers from "./handler";
-import { firstoreDb, storage } from "../init";
+import { database, firstoreDb, storage } from "../init";
 import config from "../config";
 import { getFunctionBaseUrl } from "../helpers";
 import { triggerTypeEndpointMap } from "./types";
@@ -79,6 +79,7 @@ webhookApp.post(
     await handlers.handleMembershipsUserAccountAdded(
       firstoreDb,
       storage,
+      database,
       req.body
     );
     res.status(200).json({ status: `success` });
@@ -93,6 +94,7 @@ webhookApp.post(
     await handlers.handleMembershipsUserAccountUpdated(
       firstoreDb,
       storage,
+      database,
       req.body
     );
     res.status(200).json({ status: `success` });
@@ -104,7 +106,7 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handlers.handleEcommNewOrder(firstoreDb, storage, req.body);
+    await handlers.handleEcommNewOrder(firstoreDb, storage, database, req.body);
     res.status(200).json({ status: `success` });
   }
 );
@@ -114,7 +116,12 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handlers.handleEcommOrderUpdated(firstoreDb, storage, req.body);
+    await handlers.handleEcommOrderUpdated(
+      firstoreDb,
+      storage,
+      database,
+      req.body
+    );
     res.status(200).json({ status: `success` });
   }
 );
@@ -124,7 +131,12 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handlers.handleEcommInventoryChanged(firstoreDb, storage, req.body);
+    await handlers.handleEcommInventoryChanged(
+      firstoreDb,
+      storage,
+      database,
+      req.body
+    );
     res.status(200).json({ status: `success` });
   }
 );
@@ -134,7 +146,12 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handlers.handleCollectionItemCreated(firstoreDb, storage, req.body);
+    await handlers.handleCollectionItemCreated(
+      firstoreDb,
+      storage,
+      database,
+      req.body
+    );
     res.status(200).json({ status: `success` });
   }
 );
@@ -144,7 +161,12 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handlers.handleCollectionItemChanged(firstoreDb, storage, req.body);
+    await handlers.handleCollectionItemChanged(
+      firstoreDb,
+      storage,
+      database,
+      req.body
+    );
     res.status(200).json({ status: `success` });
   }
 );
@@ -154,25 +176,35 @@ webhookApp.post(
   validateWebflowSignatureMw,
   async (req, res) => {
     logger.info("payload", req.body);
-    await handlers.handleCollectionItemDeleted(firstoreDb, storage, req.body);
+    await handlers.handleCollectionItemDeleted(
+      firstoreDb,
+      storage,
+      database,
+      req.body
+    );
     res.status(200).json({ status: `success` });
   }
 );
 
 webhookApp.post("/collectionItemUnpublished", async (req, res) => {
   logger.info("payload", req.body);
-  await handlers.handleCollectionItemUnpublished(firstoreDb, storage, req.body);
+  await handlers.handleCollectionItemUnpublished(
+    firstoreDb,
+    storage,
+    database,
+    req.body
+  );
   res.status(200).json({ status: `success` });
 });
 
 webhookApp.post("/formSubmission", async (req, res) => {
   logger.info("payload", req.body);
-  await handlers.handleFormSubmission(firstoreDb, storage, req.body);
+  await handlers.handleFormSubmission(firstoreDb, storage, database, req.body);
   res.status(200).json({ status: `success` });
 });
 
 webhookApp.post("/sitePublish", async (req, res) => {
   logger.info("payload", req.body);
-  await handlers.handleSitePublish(firstoreDb, storage, req.body);
+  await handlers.handleSitePublish(firstoreDb, storage, database, req.body);
   res.status(200).json({ status: `success` });
 });
