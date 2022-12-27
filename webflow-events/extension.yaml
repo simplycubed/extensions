@@ -167,6 +167,15 @@ params:
     example: users
     required: false
 
+  - param: USER_DATABASE_PATH
+    label: Realtime database path for storing users
+    description: >-
+      Realtime database path for user events sync to? Leave empty if you don't
+      want to sync user membership events.
+    type: string
+    example: users
+    required: false
+
   - param: USER_STORAGE_PATH
     label: Cloud Storage path for storing users
     description: >-
@@ -181,6 +190,15 @@ params:
     description: >-
       To which collection should the order events sync to? Leave empty if you
       don't want to sync order events.
+    type: string
+    example: orders
+    required: false
+
+  - param: ORDER_DATABASE_PATH
+    label: Realtime database path for storing orders
+    description: >-
+      Realtime database path for order events sync to? Leave empty if you don't
+      want to sync order events
     type: string
     example: orders
     required: false
@@ -203,6 +221,15 @@ params:
     example: inventory
     required: false
 
+  - param: INVENTORY_DATABASE_PATH
+    label: Realtime database path for storing inventory
+    description: >-
+      Realtime database path for inventory events sync to? Leave empty if you
+      don't want to sync inventory events.
+    type: string
+    example: inventory
+    required: false
+
   - param: INVENTORY_STORAGE_PATH
     label: Cloud Storage path for storing inventory
     description: >-
@@ -217,6 +244,15 @@ params:
     description: >-
       To which collection should the collection items events sync to? Leave
       empty if you don't want to sync collection items events.
+    type: string
+    example: collection-items
+    required: false
+
+  - param: COLLECTION_ITEM_DATABASE_PATH
+    label: Realtime database path for storing collection items
+    description: >-
+      Realtime database path for collection item events sync to? Leave empty if
+      you don't want to sync collection item events
     type: string
     example: collection-items
     required: false
@@ -239,6 +275,15 @@ params:
     example: form-submissions
     required: false
 
+  - param: FORM_SUBMISSION_DATABASE_PATH
+    label: Realtime database path for storing form submissions
+    description: >-
+      Realtime database path for form submission events sync to? Leave empty if
+      you don't want to sync form submission events
+    type: string
+    example: form-submissions
+    required: false
+
   - param: FORM_SUBMISSION_STORAGE_PATH
     label: Cloud Storage path for storing collection form submissions
     description: >-
@@ -253,6 +298,15 @@ params:
     description: >-
       To which collection should the site publish events sync to? Leave empty if
       you don't want to sync site publish events.
+    type: string
+    example: site-publish
+    required: false
+
+  - param: SITE_PUBLISH_DATABASE_PATH
+    label: Realtime database path for storing site publish events
+    description: >-
+      Realtime database path for site publish events sync to? Leave empty if you
+      don't want to sync site publish events
     type: string
     example: site-publish
     required: false
