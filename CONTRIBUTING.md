@@ -31,7 +31,7 @@ We welcome all feature requests, whether it's to add new functionality to an exi
 
 Here's how to submit a feature request for an existing extension:
 
-1. File your feature request through GitHub Issues using the [Feature Request template](https://github.com/firebase/extensions/issues/new?template=fr.md).
+1. File your feature request through GitHub Issues using the [Feature Request template](https://github.com/simplycubed/extensions/issues/new?template=fr.md).
 
 2. File a new [SimplyCubed Extension Support Request](mailto:support@simplycubed.com) via email. Make sure to reference your feature request's GitHub Issue in the support ticket.
 
