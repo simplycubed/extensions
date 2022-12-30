@@ -21,7 +21,7 @@ If you have a general question, need help debugging, or fall into some other cat
 
 ### [REQUIRED] Step 2: Describe your configuration
 
-- Extension name: **\_** (`webflow-events`, `extension2`, etc)
+- Extension name: **\_** (`webflow-events-database`, `webflow-events-firestore`, `webflow-events-storage`)
 - Extension version: **\_**
 - Configuration values (redact info where appropriate):
   - **\_**

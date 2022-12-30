@@ -6,7 +6,9 @@ set -e
 PUBLISHER_ID=$1
 shift
 ALL_EXTENSIONS=(
-	"extension1"
+	"webflow-events-firestore",
+	"webflow-events-database",
+	"webflow-events-storage"
 )
 EXTENSIONS=${@:-${ALL_EXTENSIONS[@]}}
 

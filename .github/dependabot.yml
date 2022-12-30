@@ -5,7 +5,23 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/_emulator/functions/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/webflow-events-firebase/functions/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/webflow-events-database/functions/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "npm"
+    directory: "/webflow-events-storage/functions/"
+    schedule:
+      interval: "daily"
