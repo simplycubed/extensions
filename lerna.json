@@ -3,7 +3,8 @@
     "*",
     "webflow-events/functions",
     "webflow-events/test-data",
-    "webflow-events-firestore/functions"
+    "webflow-events-firestore/functions",
+    "webflow-events-storage/functions"
   ],
   "version": "0.0.0"
 }
