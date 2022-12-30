@@ -1,4 +1,11 @@
 {
-  "packages": ["*", "webflow-events/functions", "webflow-events/test-data"],
+  "packages": [
+    "*",
+    "webflow-events/functions",
+    "webflow-events/test-data",
+    "webflow-events-firestore/functions",
+    "webflow-events-storage/functions",
+    "webflow-events-database/functions"
+  ],
   "version": "0.0.0"
 }
