@@ -1,13 +1,15 @@
 import express from "express";
 import morgan from "morgan";
 import Webflow from "webflow-api";
-import * as logger from "../logger";
 import * as handlers from "./handler";
 import { database } from "../init";
 import config from "../config";
-import { getFunctionBaseUrl } from "../helpers";
-import { triggerTypeEndpointMap } from "./types";
-import { createValidateWebflowSignatureMw } from "./validateWebflowSignature";
+import {
+  triggerTypeEndpointMap,
+  logger,
+  createValidateWebflowSignatureMw,
+  getFunctionBaseUrl,
+} from "@simplycubed/webflow-utils";
 import { json } from "body-parser";
 
 const webflow = new Webflow();
@@ -54,7 +56,7 @@ webhookApp.get("/auth-success", async (req, res) => {
 
   const app = new Webflow({ token: access_token });
 
-  const functionBaseUrl = getFunctionBaseUrl();
+  const functionBaseUrl = getFunctionBaseUrl(config.location, config.projectId);
   const triggerTypes = Object.keys(triggerTypeEndpointMap);
 
   // create web hooks

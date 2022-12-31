@@ -1,6 +1,6 @@
 import express from "express";
 import crypto from "crypto";
-import { createValidateWebflowSignatureMw } from "../src/webflowHook/validateWebflowSignature";
+import { createValidateWebflowSignatureMw } from "../src/validateWebflowSignature";
 import request from "supertest";
 import { json } from "body-parser";
 describe("createValidateWebflowSignatureMw", () => {

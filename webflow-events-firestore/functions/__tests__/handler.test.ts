@@ -8,7 +8,7 @@ import {
   FormSubmissionPayload,
   SitePublishPayload,
   UserAccountAddedPayload,
-} from "../src/webflowHook/types";
+} from "@simplycubed/webflow-utils";
 
 setupEnvironment();
 

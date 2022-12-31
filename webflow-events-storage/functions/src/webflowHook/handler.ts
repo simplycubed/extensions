@@ -12,7 +12,7 @@ import {
   SitePublishPayload,
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
-} from "./types";
+} from "@simplycubed/webflow-utils";
 
 async function writeInventoryToStorage(
   storage: storage.Storage,
