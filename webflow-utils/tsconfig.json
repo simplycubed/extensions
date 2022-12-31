@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
     "target": "ES2020",
@@ -9,7 +8,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "jest", "@types/jest"]
+    "types": ["node", "jest", "@types/jest"],
+    "declaration": true,
+    "declarationDir": "lib"
   },
   "compileOnSave": true,
   "include": ["src"]

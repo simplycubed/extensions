@@ -1,15 +1,15 @@
 {
   "name": "webflow-events-storage",
+  "version": "0.0.0",
   "description": "Automatically manage user data when it is added and changed in Webflow Memberships.",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "npm run build",
     "build": "npm run clean && npm run compile",
     "build:watch": "npm run clean && tsc --watch",
     "clean": "rimraf lib",
     "compile": "tsc",
     "local:emulator": "cd ../../_emulator && firebase emulators:start -P demo-test",
-    "test": "cd ../../_emulator && firebase emulators:exec jest -P demo-test",
+    "test": "jest",
     "test:local": "concurrently \"npm run local:emulator\" \"jest\"",
     "test:watch": "concurrently \"npm run local:emulator\" \"jest --watch\"",
     "generate-readme": "firebase ext:info .. --markdown > ../README.md"
@@ -17,6 +17,7 @@
   "author": "Charles Green <cg@simplycubed.com>",
   "license": "Apache-2.0",
   "dependencies": {
+    "@simplycubed/webflow-utils": "^0.0.0",
     "@types/express-serve-static-core": "4.17.32",
     "@types/jest": "^29.2.5",
     "@types/supertest": "^2.0.12",

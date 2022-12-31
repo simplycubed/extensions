@@ -1,7 +1,6 @@
 import * as admin from "firebase-admin";
 import config from "./config";
-import { getDatabaseUrl } from "./helpers";
-import * as logs from "./logger";
+import { getDatabaseUrl } from "@simplycubed/webflow-utils";
 
 // Helper function for selecting correct domain adrress
 export const databaseURL = getDatabaseUrl(
