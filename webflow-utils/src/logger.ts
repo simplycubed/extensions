@@ -14,23 +14,30 @@
  * limitations under the License.
  */
 
-import { logger } from "firebase-functions";
-import config from "./config";
+import { logger as firebaseLogger } from "firebase-functions";
 
-export const info = (...params) => {
-  if (config.debug) {
-    logger.info(...params);
+const debug = process.env.DEBUG === "true" || process.env.DEBUG == "1";
+
+const info = (...params) => {
+  if (debug) {
+    firebaseLogger.info(...params);
   }
 };
 
-export const error = (...params) => {
-  if (config.debug) {
-    logger.error(...params);
+const error = (...params) => {
+  if (debug) {
+    firebaseLogger.error(...params);
   }
 };
 
-export const log = (...params) => {
-  if (config.debug) {
-    logger.log(...params);
+const log = (...params) => {
+  if (debug) {
+    firebaseLogger.log(...params);
   }
+};
+
+export const logger = {
+  info,
+  error,
+  log,
 };

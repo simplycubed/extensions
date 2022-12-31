@@ -6,7 +6,10 @@
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": false,
-    "target": "es2017"
+    "target": "es2017",
+    "paths": {
+      "@simplycubed/webflow-utils": ["./webflow-utils/src"]
+    }
   },
   "compileOnSave": true,
   "include": ["src"],
