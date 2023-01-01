@@ -9,6 +9,18 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
+  "contributors": [
+    {
+      "name": "SimplyCubed",
+      "email": "support@simplycubed.com",
+      "url": "https://github.com/simplycubed"
+    },
+    {
+      "name": "Anas Muhammed",
+      "email": "anas.mu2022@gmail.com",
+      "url": "https://github.com/anasmuhmd"
+    }
+  ],
   "engines": {
     "node": "16"
   },
