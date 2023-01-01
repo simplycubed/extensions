@@ -1,6 +1,6 @@
 {
   "name": "webflow-events-database",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The Webflow Events Database extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "@simplycubed/webflow-utils": "^0.0.1",
     "@types/express-serve-static-core": "4.17.32",
     "@types/jest": "^29.2.5",
     "@types/supertest": "^2.0.12",
@@ -45,8 +46,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.4",
-    "webflow-api": "^1.2.2",
-    "@simplycubed/webflow-utils": "^0.0.0"
+    "webflow-api": "^1.2.2"
   },
   "engines": {
     "node": "16"
