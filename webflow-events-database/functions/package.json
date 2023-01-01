@@ -1,7 +1,7 @@
 {
   "name": "webflow-events-database",
   "version": "0.0.0",
-  "description": "Automatically manage user data when it is added and changed in Webflow Memberships.",
+  "description": "The Webflow Events Database extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
     "build": "npm run clean && npm run compile",
@@ -14,7 +14,18 @@
     "test:watch": "concurrently \"npm run local:emulator\" \"jest --watch\"",
     "generate-readme": "firebase ext:info .. --markdown > ../README.md"
   },
-  "author": "Charles Green <cg@simplycubed.com>",
+  "contributors": [
+    {
+      "name": "SimplyCubed",
+      "email": "support@simplycubed.com",
+      "url": "https://github.com/simplycubed"
+    },
+    {
+      "name": "Anas Muhammed",
+      "email": "anas.mu2022@gmail.com",
+      "url": "https://github.com/anasmuhmd"
+    }
+  ],
   "license": "Apache-2.0",
   "dependencies": {
     "@types/express-serve-static-core": "4.17.32",

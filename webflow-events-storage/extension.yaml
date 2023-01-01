@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: webflow-events
+name: webflow-events-storage
 version: 0.1.14
 specVersion: v1beta
 
-displayName: Webflow Events
-description: Webflow integration
+displayName: Webflow Events Storage
+description: Webflow integration for Google Cloud Storage
 
 license: Apache-2.0
 
-sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events
-releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events/CHANGELOG.md
+sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-storage
+releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-storage/CHANGELOG.md
 
 author:
   authorName: SimplyCubed

@@ -1,8 +1,7 @@
 {
   "name": "@simplycubed/webflow-utils",
   "version": "0.0.0",
-  "description": "> TODO: description",
-  "author": "Anas Muhammed <anas.mu2022@gmail.com>",
+  "description": "This package contains supporting helper functions and Types for Webflow.",
   "homepage": "https://github.com/simplycubed/extensions#readme",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -24,6 +23,18 @@
     "compile": "tsc",
     "test": "jest"
   },
+  "contributors": [
+    {
+      "name": "SimplyCubed",
+      "email": "support@simplycubed.com",
+      "url": "https://github.com/simplycubed"
+    },
+    {
+      "name": "Anas Muhammed",
+      "email": "anas.mu2022@gmail.com",
+      "url": "https://github.com/anasmuhmd"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/simplycubed/extensions/issues"
   },

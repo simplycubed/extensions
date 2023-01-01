@@ -1,11 +1,11 @@
 # `webflow-utils`
 
-> TODO: description
+This package contains supporting helper functions and Types for Webflow.
 
 ## Usage
 
-```
-const webflowUtils = require('webflow-utils');
+```javascript
+const webflowUtils = require("webflow-utils");
 
 // TODO: DEMONSTRATE API
 ```

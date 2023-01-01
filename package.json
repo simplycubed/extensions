@@ -14,11 +14,22 @@
     "test:watch": "concurrently \"npm run local:emulator\" \"jest --watch\"",
     "test-coverage": "jest --coverage --detectOpenHandles --forceExit",
     "generate-package-locks": "lerna exec -- npm i --package-lock-only",
-    "generate-readmes": "lerna run --parallel --ignore webflow-events-{database,firestore,storage} --ignore webflow-utils generate-readme",
+    "generate-readmes": "lerna run --parallel generate-readme",
     "prepare": "husky install"
   },
-  "repository": "",
-  "author": "SimplyCubed (https://simplycubed.com/)",
+  "repository": "https://github.com/simplycubed/extensions",
+  "contributors": [
+    {
+      "name": "SimplyCubed",
+      "email": "support@simplycubed.com",
+      "url": "https://github.com/simplycubed"
+    },
+    {
+      "name": "Anas Muhammed",
+      "email": "anas.mu2022@gmail.com",
+      "url": "https://github.com/anasmuhmd"
+    }
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/simplycubed/extensions/issues/new/choose"
