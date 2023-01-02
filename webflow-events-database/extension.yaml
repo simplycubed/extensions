@@ -37,18 +37,10 @@ contributors:
 billingRequired: true
 
 roles:
-  - role: datastore.owner
-    reason:
-      Allows the extension to create, update and delete user data from Cloud
-      Firestore.
   - role: firebasedatabase.admin
     reason:
       Allows the extension to create, update and delete user data from Realtime
       Database.
-  - role: storage.admin
-    reason:
-      Allows the extension to create, update and delete user data from Cloud
-      Storage.
 
 resources:
   - name: webflowHook
@@ -59,6 +51,9 @@ resources:
     properties:
       location: ${param:LOCATION}
       runtime: nodejs14
+      httpsTrigger:
+        securityLevel: SECURE_ALWAYS
+        url: https://${param:LOCATION}-${param:PROJECT_ID}.cloudfunctions.net/webflowHook
 
 params:
   - param: LOCATION
@@ -224,7 +219,7 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-memberships.v1.database
+  - type: firebase.extensions.webflow-events-database.v1.database
     description:
       Occurs when a set of Realtime Database paths has been marked for deletion
       following a delete user trigger.

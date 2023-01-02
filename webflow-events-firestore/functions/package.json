@@ -1,13 +1,13 @@
 {
   "name": "webflow-events-firestore",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The Webflow Events Firestore extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
     "build": "npm run clean && npm run compile",
     "build:watch": "npm run clean && tsc --watch",
     "clean": "rimraf lib",
-    "compile": "tsc",
+    "compile": "tsc -p tsconfig.build.json",
     "local:emulator": "cd ../../_emulator && firebase emulators:start -P demo-test",
     "test": "jest",
     "test:local": "concurrently \"npm run local:emulator\" \"jest\"",
@@ -28,7 +28,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "@simplycubed/webflow-utils": "^0.0.0",
+    "@simplycubed/webflow-utils": "^0.0.1",
     "@types/express-serve-static-core": "4.17.32",
     "@types/jest": "^29.2.5",
     "@types/supertest": "^2.0.12",

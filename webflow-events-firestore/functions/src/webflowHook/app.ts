@@ -6,8 +6,7 @@ import { firstoreDb } from "../init";
 import config from "../config";
 import {
   createValidateWebflowSignatureMw,
-  triggerTypeEndpointMap,
-  getFunctionBaseUrl,
+  configureWebflowAuthEndpoints,
   logger,
 } from "@simplycubed/webflow-utils";
 import { json } from "body-parser";
@@ -39,37 +38,13 @@ webhookApp.get("/health", (req, res) => {
   res.status(200).json({ status: `running` });
 });
 
-// Webflow OAuth endpoints
-webhookApp.get("/authorize", async (req, res) => {
-  const url = webflow.authorizeUrl({ client_id: config.webflowAppClientID });
-  res.redirect(url);
-});
-
-webhookApp.get("/auth-success", async (req, res) => {
-  logger.info("Code:", req.query?.code);
-  // retrieve access token
-  const { access_token } = await webflow.accessToken({
-    client_id: config.webflowAppClientID,
-    client_secret: config.webflowAppClientSecret,
-    code: req.query?.code as string,
-  });
-
-  const app = new Webflow({ token: access_token });
-
-  const functionBaseUrl = getFunctionBaseUrl(config.location, config.projectId);
-  const triggerTypes = Object.keys(triggerTypeEndpointMap);
-
-  // create web hooks
-  for (const triggerType of triggerTypes) {
-    const webhook = await app.createWebhook({
-      triggerType: triggerType,
-      url: `${functionBaseUrl}/webflowHook/${triggerTypeEndpointMap[triggerType]}`,
-      siteId: config.webflowSiteID,
-    });
-    logger.info("webhook response:", webhook?.response?.data);
-  }
-
-  res.status(200).json({ status: `success` });
+configureWebflowAuthEndpoints(webhookApp, webflow, {
+  webflowAppClientID: config.webflowAppClientID,
+  webflowAppClientSecret: config.webflowAppClientSecret,
+  location: config.location,
+  projectId: config.projectId,
+  extensionPrefix: "ext-webflow-events-database",
+  webflowSiteID: config.webflowSiteID,
 });
 
 // Webflow Hooks
