@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "lib": ["es2017"],
     "module": "commonjs",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
     "sourceMap": false,
-    "target": "es2017",
+    "target": "ES2020",
     "paths": {
       "@simplycubed/webflow-utils": ["./webflow-utils/src"]
     }
