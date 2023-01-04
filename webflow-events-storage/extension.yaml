@@ -50,7 +50,7 @@ resources:
       oauth endpoints for configuring webhooks.
     properties:
       location: ${param:LOCATION}
-      runtime: nodejs14
+      runtime: nodejs16
       httpsTrigger:
         securityLevel: SECURE_ALWAYS
         url: https://${param:LOCATION}-${param:PROJECT_ID}.cloudfunctions.net/webflowHook
