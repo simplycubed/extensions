@@ -5,6 +5,6 @@
     "webflow-events-firestore/*",
     "webflow-events-storage/*"
   ],
-  "version": "0.0.1",
-  "useWorkspaces": true
+  "version": "independent",
+  "useWorkspaces": false
 }
