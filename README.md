@@ -1,7 +1,5 @@
 # Extensions
 
-> :warning: WARNING: Still pre-release and under active development. Alpha release ETA January 15th, 2023.
-
 This project contains the source for SimplyCubed Extensions. Created and tested by SimplyCubed, these unofficial extensions are reliable and secure. To learn more about Firebase Extensions, including how to install them in your Firebase projects, visit the [Firebase documentation](https://firebase.google.com/docs/extensions).
 
 Each directory in this repo contains the source code for the extension and a README to explain how the extension works, including information about the APIs enabled, resources created, and the access granted to the extension.
