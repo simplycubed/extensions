@@ -1,6 +1,6 @@
 # Webflow Events Firestore
 
-**Author**: SimplyCubed (**[https://simplycubed.com](https://simplycubed.com)**)
+**Author**: [SimplyCubed](https://simplycubed.com)
 
 **Description**: Webflow integration for Google Cloud Firestore
 
