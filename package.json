@@ -35,6 +35,7 @@
     "url": "https://github.com/simplycubed/extensions/issues/new/choose"
   },
   "devDependencies": {
+    "@commitlint/types": "^17.4.0",
     "@types/jest": "^29.2.5",
     "concurrency": "^0.1.4",
     "concurrently": "^7.2.1",
