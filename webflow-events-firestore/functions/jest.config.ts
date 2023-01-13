@@ -1,7 +1,8 @@
+import type { Config } from "jest";
+
 const packageJson = require("./package.json");
 
-module.exports = {
-  name: packageJson.name,
+const config: Config = {
   displayName: packageJson.name,
   preset: "ts-jest",
   testMatch: ["**/__tests__/*.test.ts"],
@@ -14,3 +15,5 @@ module.exports = {
   coverageReporters: ["json", "html"],
   setupFilesAfterEnv: [],
 };
+
+export default config;
