@@ -187,7 +187,7 @@ done
 create_or_update_libray_release() {
 	local library_folder=$1
 	library_name="@simplycubed/$library_folder"
-	library_version=$(awk '/^.*"version": /' "$library_folder/package.json" | grep -E -o '(\d|\.)+')
+	library_version=$(awk '/^.*"version": /' "$library_folder/package.json" | grep -E -o '([0-9]|\.)+')
 	changelog_contents="No changelog found for this version."
 	echo $library_folder "version: " $library_version
 	# Ensure changelog exists
