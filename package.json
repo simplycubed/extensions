@@ -15,7 +15,8 @@
     "test-coverage": "jest --coverage --detectOpenHandles --forceExit",
     "generate-package-locks": "lerna exec -- npm i --package-lock-only",
     "generate-readmes": "lerna run --parallel generate-readme",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "if test \"$SKIP_POSTINSTALL\" != \"yes\" ; then lerna bootstrap --no-ci && lerna run --parallel clean && npm run build && npm run generate-package-locks ; fi"
   },
   "repository": "https://github.com/simplycubed/extensions",
   "contributors": [
