@@ -183,3 +183,33 @@ for i in $(find . -type f -name 'extension.yaml' -exec dirname {} \; | sort -u);
 	# Updates an existing release with updated content (allows updating CHANGELOG.md which will update relevant release body)
 	create_or_update_github_release "$extension_name" "$extension_version" "$changelog_contents"
 done
+
+create_or_update_libray_release() {
+	local library_folder=$1
+	library_name="@simplycubed/$library_folder"
+	library_version=$(awk '/^.*"version": /' "$library_folder/package.json" | grep -E -o '(\d|\.)+')
+	changelog_contents="No changelog found for this version."
+	echo $library_folder "version: " $library_version
+	# Ensure changelog exists
+	if [ -f "$library_folder/CHANGELOG.md" ]; then
+		# Pluck out change log contents for the latest extension version
+		changelog_contents=$(awk -v ver="$library_version" '/^## Version / { if (p) { exit }; if ($3 == ver) { p=1; next} } p && NF' "$library_folder/CHANGELOG.md")
+	else
+		echo "WARNING: A changelog could not be found at $i/CHANGELOG.md - a default entry will be used instead."
+	fi
+
+	# JSON escape the markdown content for the release body
+	changelog_contents=$(json_escape "$changelog_contents")
+
+	# Creates a new release if it does not exist
+	#   OR
+	# Updates an existing release with updated content (allows updating CHANGELOG.md which will update relevant release body)
+	create_or_update_github_release "$library_name" "$library_version" "$changelog_contents"
+}
+
+array=( "webflow-utils" )
+for i in "${array[@]}"
+do
+	echo "$i"
+	create_or_update_libray_release "$i"
+done
