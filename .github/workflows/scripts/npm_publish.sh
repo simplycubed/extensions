@@ -69,6 +69,7 @@ if [[ -z "$NPM_TOKEN" ]]; then
 fi
 
 echo "NPM package $NPM_PACKAGE_NAME and version $NPM_PACKAGE_VERSION does NOT EXIST on the NPM registry."
+npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 
 echo "Attempting to publish $NPM_PACKAGE_NAME version $NPM_PACKAGE_VERSION..."
 npm publish
