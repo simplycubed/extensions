@@ -23,7 +23,7 @@ jobs:
         if:
           ${{ github.event.inputs.package_name == '@simplycubed/webflow-utils'}}
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN_WEBFLOW_UTILS }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           cd webflow-utils
           ${{ github.workspace }}/.github/workflows/scripts/npm_publish.sh
