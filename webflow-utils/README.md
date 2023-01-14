@@ -4,8 +4,36 @@ This package contains supporting helper functions and Types for Webflow.
 
 ## Usage
 
-```javascript
-const webflowUtils = require("webflow-utils");
+Webflow signature middleware
 
-// TODO: DEMONSTRATE API
+```typescript
+import { createValidateWebflowSignatureMw } from "@simplycubed/webflow-utils";
+import express from "express";
+
+const validateWebflowSignatureMw = createValidateWebflowSignatureMw(
+  "<webflow-app-client-secret>"
+);
+const app = express();
+// attach middleware to webflow webhook
+app.post("/webflow-hook", validateWebflowSignatureMw, async (req, res) => {});
+```
+
+Configure webflow OAuth endpoints to automatically create webhooks when authenticated.
+
+```typescript
+import { configureWebflowAuthEndpoints } from "@simplycubed/webflow-utils";
+import express from "express";
+import Webflow from "webflow-api";
+
+const app = express();
+const webflow = new Webflow();
+
+configureWebflowAuthEndpoints(app, webflow, {
+  webflowAppClientID: "<webflow-app-client-id>",
+  webflowAppClientSecret: "<webflow-app-client-secret>",
+  location: "<function-location>",
+  projectId: "<google-project-id>",
+  extensionPrefix: "<firestore-extension-prefix>",
+  webflowSiteID: "<webflow-site-id>",
+});
 ```
