@@ -1,6 +1,6 @@
 {
   "name": "webflow-events-firestore",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The Webflow Events Firestore extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
