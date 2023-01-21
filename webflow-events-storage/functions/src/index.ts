@@ -18,3 +18,5 @@ import * as functions from "firebase-functions";
 import { webhookApp } from "./webflowHook/app";
 
 export const webflowHook = functions.https.onRequest(webhookApp);
+
+console.log("Test changes");
