@@ -1,4 +1,4 @@
-# EXTENSION RELEASE
+# RELEASE PROCESS
 
 The following steps are used to release the packages and extensions in this project.
 
@@ -8,10 +8,10 @@ The following steps are used to release the packages and extensions in this proj
 
 TODO: Add steps
 
-### webflow-events-\*
+### webflow-events-[database|firestore|storage]
 
 TODO: Add steps
 
-## Firebase Extension
+## Firebase Extension Release
 
 TODO: Add commands to publish updates to the simplycubed-extensions project.
