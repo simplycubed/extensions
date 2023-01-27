@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: webflow-events-storage
-version: 0.1.18
+name: rtdb-webflow-sync
+version: 0.0.1
 specVersion: v1beta
 
-displayName: Webflow Events Storage
-description: Webflow integration for Google Cloud Storage
+displayName: Webflow Events Database
+description: Webflow integration for Google Firebase Realtime Database
 
 license: Apache-2.0
 
-sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-storage
-releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-storage/CHANGELOG.md
+sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-database
+releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-database/CHANGELOG.md
 
 author:
   authorName: SimplyCubed
@@ -37,10 +37,10 @@ contributors:
 billingRequired: true
 
 roles:
-  - role: storage.admin
+  - role: firebasedatabase.admin
     reason:
-      Allows the extension to create, update and delete user data from Cloud
-      Storage.
+      Allows the extension to create, update and delete user data from Realtime
+      Database.
 
 resources:
   - name: webflowHook
@@ -113,67 +113,83 @@ params:
     required: true
     immutable: true
 
-  - param: CLOUD_STORAGE_BUCKET
-    label: Cloud Storage bucket
+  - param: SELECTED_DATABASE_INSTANCE
+    label: Realtime Database instance
     description: >
-      Which Google Cloud Storage bucket do you want to sync data to?
+      To which Realtime Database instance do you want to sync data to?
     type: string
-    example: my-project-12345.appspot.com
+    example: my-instance
     validationRegex: ^([0-9a-z_.-]*)$
-    validationErrorMessage: Invalid storage bucket
-    default: ${STORAGE_BUCKET}
-    required: true
+    validationErrorMessage: Invalid database instance
+    required: false
 
-  - param: USER_STORAGE_PATH
-    label: Cloud Storage path for storing users
+  - param: SELECTED_DATABASE_LOCATION
+    label: Realtime Database location
+    description: >
+      (Only applicable if you provided the `Realtime Database instance`
+      parameter.) To which Realtime Database location do you want to sync data
+      to?
+    type: select
+    options:
+      - label: United States
+        value: us-central1
+      - label: Belgium
+        value: europe-west1
+      - label: Singapore
+        value: asia-southeast1
+    default: us-central1
+    required: false
+
+  - param: USER_DATABASE_PATH
+    label: Realtime database path for storing users
     description: >-
-      To which collection should the user events sync to? Leave empty if you
-      don't want to sync user membership events.
+      Realtime database path for user events sync to? Leave empty if you don't
+      want to sync user membership events.
     type: string
     example: users
     required: false
 
-  - param: ORDER_STORAGE_PATH
-    label: Cloud Storage path for storing orders
+  - param: ORDER_DATABASE_PATH
+    label: Realtime database path for storing orders
     description: >-
-      To which collection should the order events sync to? Leave empty if you
-      don't want to sync order events.
+      Realtime database path for order events sync to? Leave empty if you don't
+      want to sync order events
     type: string
     example: orders
     required: false
 
-  - param: INVENTORY_STORAGE_PATH
-    label: Cloud Storage path for storing inventory
+  - param: INVENTORY_DATABASE_PATH
+    label: Realtime database path for storing inventory
     description: >-
-      To which collection should the inventory events sync to? Leave empty if
-      you don't want to sync inventory events.
+      Realtime database path for inventory events sync to? Leave empty if you
+      don't want to sync inventory events.
     type: string
     example: inventory
     required: false
 
-  - param: COLLECTION_ITEM_STORAGE_PATH
-    label: Cloud Storage path for storing collection items
+  - param: COLLECTION_ITEM_DATABASE_PATH
+    label: Realtime database path for storing collection items
     description: >-
-      To which collection should the collection items events sync to? Leave
-      empty if you don't want to sync collection items events.
+      Realtime database path for collection item events sync to? Leave empty if
+      you don't want to sync collection item events
     type: string
     example: collection-items
     required: false
 
-  - param: FORM_SUBMISSION_STORAGE_PATH
-    label: Cloud Storage path for storing collection form submissions
+  - param: FORM_SUBMISSION_DATABASE_PATH
+    label: Realtime database path for storing form submissions
     description: >-
-      To which collection should the form submissions events sync to? Leave
-      empty if you don't want to sync form submissions events.
+      Realtime database path for form submission events sync to? Leave empty if
+      you don't want to sync form submission events
     type: string
     example: form-submissions
     required: false
 
-  - param: SITE_PUBLISH_STORAGE_PATH
-    label: Cloud Storage path for storing collection site publish
+  - param: SITE_PUBLISH_DATABASE_PATH
+    label: Realtime database path for storing site publish events
     description: >-
-      To which collection should the site publish events sync to? Leave empty if
-      you don't want to sync site publish events.
+      Realtime database path for site publish events sync to? Leave empty if you
+      don't want to sync site publish events
     type: string
     example: site-publish
     required: false
@@ -203,5 +219,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-storage.v1.received
+  - type: firebase.extensions.webflow-events-database.v1.received
     description: Occurs when a payload is received from webflow

@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: webflow-events-database
-version: 0.1.18
+name: firestore-webflow-sync
+version: 0.0.1
 specVersion: v1beta
 
-displayName: Webflow Events Database
-description: Webflow integration for Google Firebase Realtime Database
+displayName: Webflow Events Firestore
+description: Webflow integration for Google Cloud Firestore
 
 license: Apache-2.0
 
-sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-database
-releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-database/CHANGELOG.md
+sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-firestore
+releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-firestore/CHANGELOG.md
 
 author:
   authorName: SimplyCubed
@@ -37,10 +37,10 @@ contributors:
 billingRequired: true
 
 roles:
-  - role: firebasedatabase.admin
+  - role: datastore.owner
     reason:
-      Allows the extension to create, update and delete user data from Realtime
-      Database.
+      Allows the extension to create, update and delete user data from Cloud
+      Firestore.
 
 resources:
   - name: webflowHook
@@ -113,83 +113,56 @@ params:
     required: true
     immutable: true
 
-  - param: SELECTED_DATABASE_INSTANCE
-    label: Realtime Database instance
-    description: >
-      To which Realtime Database instance do you want to sync data to?
-    type: string
-    example: my-instance
-    validationRegex: ^([0-9a-z_.-]*)$
-    validationErrorMessage: Invalid database instance
-    required: false
-
-  - param: SELECTED_DATABASE_LOCATION
-    label: Realtime Database location
-    description: >
-      (Only applicable if you provided the `Realtime Database instance`
-      parameter.) To which Realtime Database location do you want to sync data
-      to?
-    type: select
-    options:
-      - label: United States
-        value: us-central1
-      - label: Belgium
-        value: europe-west1
-      - label: Singapore
-        value: asia-southeast1
-    default: us-central1
-    required: false
-
-  - param: USER_DATABASE_PATH
-    label: Realtime database path for storing users
+  - param: USER_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing users
     description: >-
-      Realtime database path for user events sync to? Leave empty if you don't
-      want to sync user membership events.
+      To which collection should the user events sync to? Leave empty if you
+      don't want to sync user membership events.
     type: string
     example: users
     required: false
 
-  - param: ORDER_DATABASE_PATH
-    label: Realtime database path for storing orders
+  - param: ORDER_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing orders
     description: >-
-      Realtime database path for order events sync to? Leave empty if you don't
-      want to sync order events
+      To which collection should the order events sync to? Leave empty if you
+      don't want to sync order events.
     type: string
     example: orders
     required: false
 
-  - param: INVENTORY_DATABASE_PATH
-    label: Realtime database path for storing inventory
+  - param: INVENTORY_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing inventory
     description: >-
-      Realtime database path for inventory events sync to? Leave empty if you
-      don't want to sync inventory events.
+      To which collection should the inventory events sync to? Leave empty if
+      you don't want to sync inventory events.
     type: string
     example: inventory
     required: false
 
-  - param: COLLECTION_ITEM_DATABASE_PATH
-    label: Realtime database path for storing collection items
+  - param: COLLECTION_ITEM_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing collection items
     description: >-
-      Realtime database path for collection item events sync to? Leave empty if
-      you don't want to sync collection item events
+      To which collection should the collection items events sync to? Leave
+      empty if you don't want to sync collection items events.
     type: string
     example: collection-items
     required: false
 
-  - param: FORM_SUBMISSION_DATABASE_PATH
-    label: Realtime database path for storing form submissions
+  - param: FORM_SUBMISSION_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing form submissions
     description: >-
-      Realtime database path for form submission events sync to? Leave empty if
-      you don't want to sync form submission events
+      To which collection should the form submissions events sync to? Leave
+      empty if you don't want to sync form submissions events.
     type: string
     example: form-submissions
     required: false
 
-  - param: SITE_PUBLISH_DATABASE_PATH
-    label: Realtime database path for storing site publish events
+  - param: SITE_PUBLISH_FIRESTORE_PATH
+    label: Cloud Firestore collection path for storing site publish events
     description: >-
-      Realtime database path for site publish events sync to? Leave empty if you
-      don't want to sync site publish events
+      To which collection should the site publish events sync to? Leave empty if
+      you don't want to sync site publish events.
     type: string
     example: site-publish
     required: false
@@ -219,5 +192,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-database.v1.received
+  - type: firebase.extensions.webflow-events-firestore.v1.received
     description: Occurs when a payload is received from webflow
