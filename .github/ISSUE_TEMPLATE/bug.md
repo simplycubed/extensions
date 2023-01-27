@@ -21,7 +21,7 @@ If you have a general question, need help debugging, or fall into some other cat
 
 ### [REQUIRED] Step 2: Describe your configuration
 
-- Extension name: **\_** (`webflow-events-database`, `webflow-events-firestore`, `webflow-events-storage`)
+- Extension name: **\_** (`rtdb-webflow-sync`, `firestore-webflow-sync`, `storage-webflow-sync`)
 - Extension version: **\_**
 - Configuration values (redact info where appropriate):
   - **\_**

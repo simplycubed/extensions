@@ -22,10 +22,10 @@ updates:
     schedule:
       interval: "daily"
   - package-ecosystem: "npm"
-    directory: "/webflow-events-database/functions/"
+    directory: "/rtdb-webflow-sync/functions/"
     schedule:
       interval: "daily"
   - package-ecosystem: "npm"
-    directory: "/webflow-events-storage/functions/"
+    directory: "/storage-webflow-sync/functions/"
     schedule:
       interval: "daily"

@@ -1,8 +1,8 @@
 {
   "extensions": {
-    "webflow-events-database": "../webflow-events-database",
-    "webflow-events-firestore": "../webflow-events-firestore",
-    "webflow-events-storage": "../webflow-events-storage"
+    "rtdb-webflow-sync": "../rtdb-webflow-sync",
+    "firestore-webflow-sync": "../firestore-webflow-sync",
+    "storage-webflow-sync": "../storage-webflow-sync"
   },
   "storage": {
     "rules": "storage.rules"

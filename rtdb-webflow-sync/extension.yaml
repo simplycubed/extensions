@@ -1,0 +1,223 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: rtdb-webflow-sync
+version: 0.0.1
+specVersion: v1beta
+
+displayName: Webflow Events Database
+description: Webflow integration for Google Firebase Realtime Database
+
+license: Apache-2.0
+
+sourceUrl: https://github.com/simplycubed/extensions/tree/main/rtdb-webflow-sync
+releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/rtdb-webflow-sync/CHANGELOG.md
+
+author:
+  authorName: SimplyCubed
+  url: https://simplycubed.com
+
+contributors:
+  - authorName: Charles Green
+    url: https://github.com/charlesgreen
+  - authorName: Anas Muhammed
+    url: https://github.com/anasmuhmd
+
+billingRequired: true
+
+roles:
+  - role: firebasedatabase.admin
+    reason:
+      Allows the extension to create, update and delete user data from Realtime
+      Database.
+
+resources:
+  - name: webflowHook
+    type: firebaseextensions.v1beta.function
+    description:
+      Hooks for webflow, contains endpoints that handle events from webflow and
+      oauth endpoints for configuring webhooks.
+    properties:
+      location: ${param:LOCATION}
+      runtime: nodejs16
+      httpsTrigger:
+        securityLevel: SECURE_ALWAYS
+        url: https://${param:LOCATION}-${param:PROJECT_ID}.cloudfunctions.net/webflowHook
+
+params:
+  - param: LOCATION
+    label: Cloud Functions location
+    description: >-
+      Where do you want to deploy the functions created for this extension?  You
+      usually want a location close to your database or Storage bucket. For help
+      selecting a location, refer to the [location selection
+      guide](https://firebase.google.com/docs/functions/locations).
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Los Angeles (us-west2)
+        value: us-west2
+      - label: Salt Lake City (us-west3)
+        value: us-west3
+      - label: Las Vegas (us-west4)
+        value: us-west4
+      - label: Warsaw (europe-central2)
+        value: europe-central2
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Zurich (europe-west6)
+        value: europe-west6
+      - label: Taiwan (asia-east1)
+        value: asia-east1
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+      - label: Osaka (asia-northeast2)
+        value: asia-northeast2
+      - label: Seoul (asia-northeast3)
+        value: asia-northeast3
+      - label: Mumbai (asia-south1)
+        value: asia-south1
+      - label: Singapore (asia-southeast1)
+        value: asia-southeast1
+      - label: Jakarta (asia-southeast2)
+        value: asia-southeast2
+      - label: Montreal (northamerica-northeast1)
+        value: northamerica-northeast1
+      - label: Sao Paulo (southamerica-east1)
+        value: southamerica-east1
+      - label: Sydney (australia-southeast1)
+        value: australia-southeast1
+    default: us-central1
+    required: true
+    immutable: true
+
+  - param: SELECTED_DATABASE_INSTANCE
+    label: Realtime Database instance
+    description: >
+      To which Realtime Database instance do you want to sync data to?
+    type: string
+    example: my-instance
+    validationRegex: ^([0-9a-z_.-]*)$
+    validationErrorMessage: Invalid database instance
+    required: false
+
+  - param: SELECTED_DATABASE_LOCATION
+    label: Realtime Database location
+    description: >
+      (Only applicable if you provided the `Realtime Database instance`
+      parameter.) To which Realtime Database location do you want to sync data
+      to?
+    type: select
+    options:
+      - label: United States
+        value: us-central1
+      - label: Belgium
+        value: europe-west1
+      - label: Singapore
+        value: asia-southeast1
+    default: us-central1
+    required: false
+
+  - param: USER_DATABASE_PATH
+    label: Realtime database path for storing users
+    description: >-
+      Realtime database path for user events sync to? Leave empty if you don't
+      want to sync user membership events.
+    type: string
+    example: users
+    required: false
+
+  - param: ORDER_DATABASE_PATH
+    label: Realtime database path for storing orders
+    description: >-
+      Realtime database path for order events sync to? Leave empty if you don't
+      want to sync order events
+    type: string
+    example: orders
+    required: false
+
+  - param: INVENTORY_DATABASE_PATH
+    label: Realtime database path for storing inventory
+    description: >-
+      Realtime database path for inventory events sync to? Leave empty if you
+      don't want to sync inventory events.
+    type: string
+    example: inventory
+    required: false
+
+  - param: COLLECTION_ITEM_DATABASE_PATH
+    label: Realtime database path for storing collection items
+    description: >-
+      Realtime database path for collection item events sync to? Leave empty if
+      you don't want to sync collection item events
+    type: string
+    example: collection-items
+    required: false
+
+  - param: FORM_SUBMISSION_DATABASE_PATH
+    label: Realtime database path for storing form submissions
+    description: >-
+      Realtime database path for form submission events sync to? Leave empty if
+      you don't want to sync form submission events
+    type: string
+    example: form-submissions
+    required: false
+
+  - param: SITE_PUBLISH_DATABASE_PATH
+    label: Realtime database path for storing site publish events
+    description: >-
+      Realtime database path for site publish events sync to? Leave empty if you
+      don't want to sync site publish events
+    type: string
+    example: site-publish
+    required: false
+
+  - param: WEBFLOW_APP_CLIENT_ID
+    label: Client ID of the webflow app from which hooks will be created.
+    description: >-
+      Client ID of the webflow app from which hooks will be  created.
+    type: secret
+    example: 5af48d73b096a6712c70f11483130
+    required: true
+
+  - param: WEBFLOW_APP_CLIENT_SECRET
+    label: Client secret of the webflow app from which hooks will be  created.
+    description: >-
+      Client secret of the webflow app from which hooks will be  created.
+    type: secret
+    example: 72811beacf8e996ba762b6c4ea7b9027
+    required: true
+
+  - param: WEBFLOW_SITE_ID
+    label: Webflow site id for which hooks will be  created.
+    description: >-
+      Webflow site id for which hooks will be  created.
+    type: string
+    example: 639a47785bc626ab0650d7d7
+    required: true
+
+events:
+  - type: firebase.extensions.rtdb-webflow-sync.v1.received
+    description: Occurs when a payload is received from webflow
