@@ -43,7 +43,7 @@ configureWebflowAuthEndpoints(webhookApp, webflow, {
   webflowAppClientSecret: config.webflowAppClientSecret,
   location: config.location,
   projectId: config.projectId,
-  extensionPrefix: "ext-webflow-events-database",
+  extensionPrefix: "ext-rtdb-webflow-sync",
   webflowSiteID: config.webflowSiteID,
 });
 

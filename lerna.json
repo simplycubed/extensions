@@ -1,9 +1,9 @@
 {
   "packages": [
     "*",
-    "webflow-events-database/*",
-    "webflow-events-firestore/*",
-    "webflow-events-storage/*"
+    "firestore-webflow-sync/*",
+    "rtdb-webflow-sync/*",
+    "storage-webflow-sync/*"
   ],
   "version": "independent",
   "useWorkspaces": false

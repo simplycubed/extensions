@@ -21,8 +21,8 @@ description: Webflow integration for Google Firebase Realtime Database
 
 license: Apache-2.0
 
-sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-database
-releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-database/CHANGELOG.md
+sourceUrl: https://github.com/simplycubed/extensions/tree/main/rtdb-webflow-sync
+releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/rtdb-webflow-sync/CHANGELOG.md
 
 author:
   authorName: SimplyCubed
@@ -219,5 +219,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-database.v1.received
+  - type: firebase.extensions.rtdb-webflow-sync.v1.received
     description: Occurs when a payload is received from webflow

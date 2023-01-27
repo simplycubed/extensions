@@ -14,7 +14,7 @@ Issues filed here should be about a feature request for a **specific extension i
 
 ### [REQUIRED] Step 2: Extension name
 
-This feature request is for extension: **\_** (`webflow-event-database`, `webflow-events-firestore`, `webflow-events-storage`)
+This feature request is for extension: **\_** (`webflow-event-database`, `firestore-webflow-sync`, `storage-webflow-sync`)
 
 ### What feature would you like to see?
 

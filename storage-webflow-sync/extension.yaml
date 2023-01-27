@@ -21,8 +21,8 @@ description: Webflow integration for Google Cloud Storage
 
 license: Apache-2.0
 
-sourceUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-storage
-releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/webflow-events-storage/CHANGELOG.md
+sourceUrl: https://github.com/simplycubed/extensions/tree/main/storage-webflow-sync
+releaseNotesUrl: https://github.com/simplycubed/extensions/tree/main/storage-webflow-sync/CHANGELOG.md
 
 author:
   authorName: SimplyCubed
@@ -203,5 +203,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-storage.v1.received
+  - type: firebase.extensions.storage-webflow-sync.v1.received
     description: Occurs when a payload is received from webflow
