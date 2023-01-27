@@ -219,7 +219,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-database.v1.database
-    description:
-      Occurs when a set of Realtime Database paths has been marked for deletion
-      following a delete user trigger.
+  - type: firebase.extensions.webflow-events-database.v1.received
+    description: Occurs when a payload is received from webflow

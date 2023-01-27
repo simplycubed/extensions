@@ -30,6 +30,16 @@ jest.mock("../src/config", () => {
   };
 });
 
+jest.mock("firebase-admin/eventarc", () => {
+  return {
+    getEventarc: () => ({
+      channel: () => ({
+        publish: jest.fn(),
+      }),
+    }),
+  };
+});
+
 describe("Test handlers", () => {
   const userId = "6287ec36a841b25637c663df";
   const orderId = "6287ec36a841b25637c66311";

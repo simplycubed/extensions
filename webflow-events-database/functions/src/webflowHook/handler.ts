@@ -13,6 +13,7 @@ import {
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
 } from "@simplycubed/webflow-utils";
+import { getEventarc } from "firebase-admin/eventarc";
 
 async function writeUserToDatabase(
   realtimeDb: database.Database,
@@ -84,6 +85,7 @@ export const handleMembershipsUserAccountAdded = async (
 ) => {
   if (config.userDatabasePath) {
     await writeUserToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -96,6 +98,7 @@ export const handleMembershipsUserAccountUpdated = async (
 ) => {
   if (config.userDatabasePath) {
     await writeUserToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -108,6 +111,7 @@ export const handleEcommNewOrder = async (
 ) => {
   if (config.orderDatabasePath) {
     await writeOrderToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -120,6 +124,7 @@ export const handleEcommOrderUpdated = async (
 ) => {
   if (config.orderDatabasePath) {
     await writeOrderToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -132,6 +137,7 @@ export const handleEcommInventoryChanged = async (
 ) => {
   if (config.inventoryDatabasePath) {
     await writeInventoryToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -141,6 +147,7 @@ export const handleCollectionItemCreated = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await writeCollectionItemToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -153,6 +160,7 @@ export const handleCollectionItemChanged = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await writeCollectionItemToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -165,6 +173,7 @@ export const handleCollectionItemDeleted = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await deleteCollectionItemFromDatabase(realtimeDb, payload.itemId);
+    await publishEvent(payload);
   }
 };
 
@@ -177,6 +186,7 @@ export const handleCollectionItemUnpublished = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await deleteCollectionItemFromDatabase(realtimeDb, payload.itemId);
+    await publishEvent(payload);
   }
 };
 
@@ -189,6 +199,7 @@ export const handleFormSubmission = async (
 ) => {
   if (config.formSubmissionDatabasePath) {
     await writeFormSubmissionToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -201,5 +212,14 @@ export const handleSitePublish = async (
 ) => {
   if (config.sitePublishDatabasePath) {
     await writeSitePublishToDatabase(realtimeDb, payload);
+    await publishEvent(payload);
   }
+};
+
+const publishEvent = async (payload: any) => {
+  await getEventarc().channel().publish({
+    type: "firebase.extensions.webflow-events-database.v1.received",
+    subject: "Payload Received",
+    data: payload,
+  });
 };

@@ -11,6 +11,16 @@ admin.initializeApp({
 
 const storage = admin.storage();
 
+jest.mock("firebase-admin/eventarc", () => {
+  return {
+    getEventarc: () => ({
+      channel: () => ({
+        publish: jest.fn(),
+      }),
+    }),
+  };
+});
+
 jest.mock("../src/config", () => {
   return {
     storageBucketDefault: "test.appspot.com",

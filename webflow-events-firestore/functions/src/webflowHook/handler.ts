@@ -13,6 +13,7 @@ import {
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
 } from "@simplycubed/webflow-utils";
+import { getEventarc } from "firebase-admin/eventarc";
 
 async function writeUserToFirestore(
   db: firestore.Firestore,
@@ -91,6 +92,7 @@ export const handleMembershipsUserAccountAdded = async (
   if (config.userFirestorePath) {
     // sync to firestore
     await writeUserToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -104,6 +106,7 @@ export const handleMembershipsUserAccountUpdated = async (
   if (config.userFirestorePath) {
     // sync to firestore
     await writeUserToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -117,6 +120,7 @@ export const handleEcommNewOrder = async (
   if (config.userFirestorePath) {
     // sync to firestore
     await writeOrderToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -130,6 +134,7 @@ export const handleEcommOrderUpdated = async (
   if (config.orderFirestorePath) {
     // sync to firestore
     await writeOrderToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -143,6 +148,7 @@ export const handleEcommInventoryChanged = async (
   if (config.inventoryFirestorePath) {
     // sync to firestore
     await writeInventoryToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -153,6 +159,7 @@ export const handleCollectionItemCreated = async (
   if (config.collectionItemFirestorePath) {
     // sync to firestore
     await writeCollectionItemToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -166,6 +173,7 @@ export const handleCollectionItemChanged = async (
   if (config.collectionItemFirestorePath) {
     // sync to firestore
     await writeCollectionItemToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -179,6 +187,7 @@ export const handleCollectionItemDeleted = async (
   if (config.collectionItemFirestorePath) {
     // delete from firestore
     await deleteCollectionItemFromFirestore(db, payload.itemId);
+    await publishEvent(payload);
   }
 };
 
@@ -192,6 +201,7 @@ export const handleCollectionItemUnpublished = async (
   if (config.collectionItemFirestorePath) {
     // delete from firestore
     await deleteCollectionItemFromFirestore(db, payload.itemId);
+    await publishEvent(payload);
   }
 };
 
@@ -204,6 +214,7 @@ export const handleFormSubmission = async (
 ) => {
   if (config.formSubmissionFirstorePath) {
     await writeFormSubmissionToFirestore(db, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -216,5 +227,14 @@ export const handleSitePublish = async (
 ) => {
   if (config.sitePublishFirestorePath) {
     await writeSitePublishToFirestore(db, payload);
+    await publishEvent(payload);
   }
+};
+
+const publishEvent = async (payload: any) => {
+  await getEventarc().channel().publish({
+    type: "firebase.extensions.webflow-events-firestore.v1.received",
+    subject: "Payload Received",
+    data: payload,
+  });
 };

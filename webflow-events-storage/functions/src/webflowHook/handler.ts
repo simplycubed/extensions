@@ -13,6 +13,7 @@ import {
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
 } from "@simplycubed/webflow-utils";
+import { getEventarc } from "firebase-admin/eventarc";
 
 async function writeInventoryToStorage(
   storage: storage.Storage,
@@ -100,6 +101,7 @@ export const handleMembershipsUserAccountAdded = async (
   if (config.userStoragePath) {
     // sync to storage
     await writeUserToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -113,6 +115,7 @@ export const handleMembershipsUserAccountUpdated = async (
   if (config.userStoragePath) {
     // sync to storage
     await writeUserToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -126,6 +129,7 @@ export const handleEcommNewOrder = async (
   if (config.userStoragePath) {
     // sync to storage
     await writeOrderToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -139,6 +143,7 @@ export const handleEcommOrderUpdated = async (
   if (config.orderStoragePath) {
     // sync to storage
     await writeOrderToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -152,6 +157,7 @@ export const handleEcommInventoryChanged = async (
   if (config.inventoryStoragePath) {
     // sync to storage
     await writeInventoryToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -162,6 +168,7 @@ export const handleCollectionItemCreated = async (
   if (config.collectionItemStoragePath) {
     // sync to storage
     await writeCollectionItemToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -175,6 +182,7 @@ export const handleCollectionItemChanged = async (
   if (config.collectionItemStoragePath) {
     // sync to storage
     await writeCollectionItemToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -188,6 +196,7 @@ export const handleCollectionItemDeleted = async (
   if (config.collectionItemStoragePath) {
     // delete from storage
     await deleteCollectionItemFromStorage(storage, payload.itemId);
+    await publishEvent(payload);
   }
 };
 
@@ -201,6 +210,7 @@ export const handleCollectionItemUnpublished = async (
   if (config.collectionItemStoragePath) {
     // delete from storage
     await deleteCollectionItemFromStorage(storage, payload.itemId);
+    await publishEvent(payload);
   }
 };
 
@@ -213,6 +223,7 @@ export const handleFormSubmission = async (
 ) => {
   if (config.formSubmissionStoragePath) {
     await writeFormSubmissionToStorage(storage, payload);
+    await publishEvent(payload);
   }
 };
 
@@ -225,5 +236,14 @@ export const handleSitePublish = async (
 ) => {
   if (config.sitePublishStoragePath) {
     await writeSitePublishToStorage(storage, payload);
+    await publishEvent(payload);
   }
+};
+
+const publishEvent = async (payload: any) => {
+  await getEventarc().channel().publish({
+    type: "firebase.extensions.webflow-events-storage.v1.received",
+    subject: "Payload Received",
+    data: payload,
+  });
 };

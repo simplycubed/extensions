@@ -192,7 +192,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-firestore.v1.firestore
-    description:
-      Occurs when a set of Firestore paths has been marked for deletion
-      following a delete user trigger.
+  - type: firebase.extensions.webflow-events-firestore.v1.received
+    description: Occurs when a payload is received from webflow

@@ -203,7 +203,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.webflow-events-storage.v1.storage
-    description:
-      Occurs when a set of Storage paths has been marked for deletion following
-      a delete user trigger.
+  - type: firebase.extensions.webflow-events-storage.v1.received
+    description: Occurs when a payload is received from webflow
