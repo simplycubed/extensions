@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/simplycubed/extensions/compare/storage-webflow-sync@0.1.1...storage-webflow-sync@0.1.2) (2023-02-07)
+
+**Note:** Version bump only for package storage-webflow-sync
+
 ## [0.1.1](https://github.com/simplycubed/extensions/compare/storage-webflow-sync@0.1.0...storage-webflow-sync@0.1.1) (2023-02-07)
 
 **Note:** Version bump only for package storage-webflow-sync
