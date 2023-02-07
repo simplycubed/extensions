@@ -54,7 +54,6 @@ export const configureWebflowAuthEndpoints = (
       });
       logger.info("webhook response:", webhook?.response?.data);
     }
-
     res.status(200).json({ status: `success` });
   });
 };
