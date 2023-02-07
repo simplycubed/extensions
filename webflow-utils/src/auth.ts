@@ -12,6 +12,7 @@ export interface AuthParams {
   extensionPrefix: string;
   webflowSiteID: string;
 }
+
 export const configureWebflowAuthEndpoints = (
   webhookApp: express.Express,
   webflow: Webflow,
