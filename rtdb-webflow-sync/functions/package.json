@@ -1,6 +1,6 @@
 {
   "name": "rtdb-webflow-sync",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "The Webflow Events Database extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
