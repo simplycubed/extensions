@@ -37,7 +37,7 @@ contributors:
 billingRequired: true
 
 roles:
-  - role: storage.admin
+  - role: storage.objectAdmin
     reason:
       Allows the extension to create, update and delete user data from Cloud
       Storage.
