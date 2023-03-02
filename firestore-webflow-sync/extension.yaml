@@ -37,7 +37,7 @@ contributors:
 billingRequired: true
 
 roles:
-  - role: datastore.owner
+  - role: datastore.user
     reason:
       Allows the extension to create, update and delete user data from Cloud
       Firestore.
