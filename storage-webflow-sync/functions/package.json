@@ -1,6 +1,6 @@
 {
   "name": "storage-webflow-sync",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "The Webflow Events Storage extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
