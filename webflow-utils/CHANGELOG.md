@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/simplycubed/extensions/compare/@simplycubed/webflow-utils@0.1.6...@simplycubed/webflow-utils@0.1.7) (2023-04-21)
+
+**Note:** Version bump only for package @simplycubed/webflow-utils
+
 ## [0.1.6](https://github.com/simplycubed/extensions/compare/@simplycubed/webflow-utils@0.1.5...@simplycubed/webflow-utils@0.1.6) (2023-04-06)
 
 **Note:** Version bump only for package @simplycubed/webflow-utils
