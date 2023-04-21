@@ -18,6 +18,7 @@ specVersion: v1beta
 
 displayName: Webflow Events Firestore
 description: Webflow integration for Google Cloud Firestore
+icon: icon.png
 
 license: Apache-2.0
 
