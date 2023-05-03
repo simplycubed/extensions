@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/simplycubed/extensions/compare/@simplycubed/webflow-utils@0.1.7...@simplycubed/webflow-utils@0.1.8) (2023-05-03)
+
+### Bug Fixes
+
+- add goOffline for realtimedb tests, update CI, replace console.error, update readme ([#237](https://github.com/simplycubed/extensions/issues/237)) ([8bb9413](https://github.com/simplycubed/extensions/commit/8bb9413131e3eb8e633896ec9188fcab759400ae))
+
 ## [0.1.7](https://github.com/simplycubed/extensions/compare/@simplycubed/webflow-utils@0.1.6...@simplycubed/webflow-utils@0.1.7) (2023-04-21)
 
 **Note:** Version bump only for package @simplycubed/webflow-utils
