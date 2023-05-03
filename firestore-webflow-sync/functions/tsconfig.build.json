@@ -1,6 +1,6 @@
 {
-  "extends": "../../tsconfig.build.json",
   "compilerOptions": {
+    "noUnusedLocals": true,
     "outDir": "lib",
     "target": "esnext",
     "module": "commonjs",
@@ -13,5 +13,6 @@
     "types": ["node", "jest", "@types/jest"]
   },
   "compileOnSave": true,
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
