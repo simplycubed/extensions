@@ -4,7 +4,8 @@
   "description": "The Webflow Events Firestore extension lets you sync Webflow data in your Google Firebase project.",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run check-bin && npm run compile",
+    "check-bin": "ls node_modules/.bin",
     "build:watch": "npm run clean && tsc --watch",
     "clean": "rimraf lib",
     "compile": "./node_modules/.bin/tsc -p tsconfig.build.json",
