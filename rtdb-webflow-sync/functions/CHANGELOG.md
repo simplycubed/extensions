@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/simplycubed/extensions/compare/rtdb-webflow-sync@0.1.12...rtdb-webflow-sync@0.2.0) (2023-05-03)
+
+### Features
+
+- auto sync extension version and change log ([#244](https://github.com/simplycubed/extensions/issues/244)) ([4dbb175](https://github.com/simplycubed/extensions/commit/4dbb17526fae5189a89164186fcf9866f555c7ea))
+
 ## [0.1.12](https://github.com/simplycubed/extensions/compare/rtdb-webflow-sync@0.1.11...rtdb-webflow-sync@0.1.12) (2023-05-03)
 
 **Note:** Version bump only for package rtdb-webflow-sync
