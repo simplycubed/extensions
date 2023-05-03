@@ -12,6 +12,11 @@ You can also browse official Firebase extensions from the following sources:
 - [Firebase Extensions dashboard](https://console.firebase.google.com/project/_/extensions/) in the Firebase console
   You can also browse official Firebase extensions on the [Extensions Marketplace](https://extensions.dev).
 
+## Running tests
+
+Running `npm run test:emulator` will spwan firebase emulator and run tests inside it.
+You can also run the emulator separately (`npm run local:emulator`) and then run tests using `npm run test`.
+
 ## License
 
 This project is licensed under Apache 2.0.  

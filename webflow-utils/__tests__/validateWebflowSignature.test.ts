@@ -3,6 +3,7 @@ import crypto from "crypto";
 import { createValidateWebflowSignatureMw } from "../src/validateWebflowSignature";
 import request from "supertest";
 import { json } from "body-parser";
+
 describe("createValidateWebflowSignatureMw", () => {
   const clientSecret = "testsecret";
   const app = express();

@@ -53,6 +53,10 @@ describe("Test handlers", () => {
   const formSubmissionId = "6287ec36a841b25637c66344";
   const siteId = "6287ec36a841b25637c66355";
 
+  afterAll(async () => {
+    realtimeDb.goOffline();
+  });
+
   beforeEach(async () => {
     await realtimeDb.ref(`${config.userDatabasePath}/${userId}`).remove();
     await realtimeDb.ref(`${config.orderDatabasePath}/${orderId}`).remove();
