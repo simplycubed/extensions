@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: rtdb-webflow-sync
-version: 0.1.11
+version: 0.2.1
 specVersion: v1beta
 
 displayName: Webflow Events Database

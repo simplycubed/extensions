@@ -1,3 +1,13 @@
+## Version 0.2.0
+
+### Features
+
+- auto sync extension version and change log ([#244](https://github.com/simplycubed/extensions/issues/244)) ([4dbb175](https://github.com/simplycubed/extensions/commit/4dbb17526fae5189a89164186fcf9866f555c7ea))
+
+## Version 0.1.9
+
+**Note:** Version bump only for package firestore-webflow-sync
+
 ## Version 0.1.8
 
 **Note:** Version bump only for package firestore-webflow-sync
