@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "build:watch": "npm run clean && tsc --watch",
-    "clean": "rimraf lib",
+    "clean": "rimraf ./lib",
     "compile": "tsc -p tsconfig.build.json",
     "local:emulator": "cd ../../_emulator && firebase emulators:start -P demo-test",
     "test": "jest",
