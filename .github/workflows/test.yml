@@ -23,6 +23,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: NPM install
         run: npm install
+
       - name: Install firebase CLI
         uses: nick-invision/retry@v2
         with:
@@ -30,3 +31,6 @@ jobs:
           retry_wait_seconds: 60
           max_attempts: 3
           command: npm i -g firebase-tools
+
+      - name: Run tests
+        run: yarn test:emulator
