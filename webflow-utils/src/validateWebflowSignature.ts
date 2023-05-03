@@ -1,6 +1,7 @@
 // Import Node's Crypto module
 import crypto from "crypto";
 import { RequestHandler } from "express";
+import { error } from "firebase-functions/logger";
 
 // Reference: https://developers.webflow.com/docs/verifying-webhook-signatures
 // Webhook Request Validation
@@ -60,7 +61,7 @@ export const createValidateWebflowSignatureMw: (
       next(); // valid request
     }
   } catch (err) {
-    console.log(err);
+    error(err);
     res.status(401).json({ error: "failed to verify webflow signature" });
   }
 };
