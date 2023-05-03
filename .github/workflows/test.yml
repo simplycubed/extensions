@@ -33,4 +33,4 @@ jobs:
           command: npm i -g firebase-tools
 
       - name: Run tests
-        run: yarn test:emulator
+        run: npm run test:emulator
