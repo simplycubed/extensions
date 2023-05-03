@@ -37,8 +37,8 @@ jobs:
           git stash
           git checkout ${{ github.ref }}
           if [ ${{ github.base_ref }} = development ]; then
-            npx lerna version --conventional-commits --conventional-prerelease --preid beta --yes
+            npx lerna version --no-granular-pathspec --conventional-commits --conventional-prerelease --preid beta --yes
           else
-            npx lerna version --conventional-commits --create-release github --yes
+            npx lerna version --no-granular-pathspec --conventional-commits --create-release github --yes
           fi
           npx lerna publish from-git --yes
