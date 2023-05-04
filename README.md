@@ -17,6 +17,18 @@ You can also browse official Firebase extensions from the following sources:
 Running `npm run test:emulator` will spwan firebase emulator and run tests inside it.
 You can also run the emulator separately (`npm run local:emulator`) and then run tests using `npm run test`.
 
+## Publishing
+
+1. After a PR is merged, publish pipeline  automatically updates the versions (along with extension.yaml and CHANGELOG.md) and creates releases on github.
+2. Once releases are created, extensions can be published (done manually) using the command:
+  ```
+  firebase ext:dev:publish simplycubed/$extension-name --repo=https://github.com/simplycubed/extensions --root=$extension-name --ref=$extension-release-tag
+  ```
+eg:
+```
+firebase ext:dev:publish simplycubed/rtdb-webflow-sync --repo=https://github.com/simplycubed/extensions --root=rtdb-webflow-sync --ref=rtdb-webflow-sync@0.2.4
+```
+
 ## License
 
 This project is licensed under Apache 2.0.  
