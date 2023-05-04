@@ -19,6 +19,7 @@ specVersion: v1beta
 displayName: Webflow Events Storage
 description: Webflow integration for Google Cloud Storage
 icon: icon.png
+tags: [utilities]
 
 license: Apache-2.0
 
