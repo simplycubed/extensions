@@ -1,3 +1,7 @@
+## Version 0.2.4
+
+**Note:** Version bump only for package firestore-webflow-sync
+
 ## Version 0.2.3
 
 **Note:** Version bump only for package firestore-webflow-sync
