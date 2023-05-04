@@ -24,7 +24,8 @@
     "compile": "tsc",
     "test": "jest",
     "prepare": "npm run build",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "precommit": "echo \"No precommit hook\""
   },
   "contributors": [
     {
