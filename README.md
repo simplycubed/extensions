@@ -22,13 +22,13 @@ You can also run the emulator separately (`npm run local:emulator`) and then run
 1. After a PR is merged, publish pipeline automatically updates the versions (along with extension.yaml and CHANGELOG.md) and creates releases on github.
 2. Once releases are created, extensions can be published (done manually) using the command:
 
-```
+```bash
 firebase ext:dev:publish simplycubed/$extension-name --repo=https://github.com/simplycubed/extensions --root=$extension-name --ref=$extension-release-tag
 ```
 
 eg:
 
-```
+```bash
 firebase ext:dev:publish simplycubed/rtdb-webflow-sync --repo=https://github.com/simplycubed/extensions --root=rtdb-webflow-sync --ref=rtdb-webflow-sync@0.2.4
 ```
 
