@@ -1,6 +1,6 @@
 {
   "name": "@simplycubed/webflow-utils",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": false,
   "description": "This package contains supporting helper functions and Types for Webflow.",
   "homepage": "https://github.com/simplycubed/extensions#readme",
