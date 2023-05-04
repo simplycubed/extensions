@@ -19,7 +19,7 @@ export async function sync(extensionPath: string) {
       firestoreVersionLog = `${firestoreVersionLog}## Version ${version}\n${log}`;
     }
   } while (matches);
-  writeFileSync(extensionPath + "/CHANGELOG.md", firestoreVersionLog);
+  writeFileSync(extensionPath + "/CHANGELOG.md", firestoreVersionLog.trim());
 
   // sync extension version
   const packageJson = JSON.parse(
