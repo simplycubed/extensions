@@ -19,6 +19,7 @@ specVersion: v1beta
 displayName: Webflow Events Database
 description: Webflow integration for Google Firebase Realtime Database
 icon: icon.png
+tags: [utilities]
 
 license: Apache-2.0
 
