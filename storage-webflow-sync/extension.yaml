@@ -16,7 +16,7 @@ name: storage-webflow-sync
 version: 0.2.5
 specVersion: v1beta
 
-displayName: Webflow Events Storage
+displayName: Sync Webflow Events to Storage
 description: Webflow integration for Google Cloud Storage
 icon: icon.png
 tags: [utilities]

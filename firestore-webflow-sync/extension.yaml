@@ -16,7 +16,7 @@ name: firestore-webflow-sync
 version: 0.2.5
 specVersion: v1beta
 
-displayName: Webflow Events Firestore
+displayName: Sync Webflow Events to Firestore
 description: Webflow integration for Google Cloud Firestore
 icon: icon.png
 tags: [utilities]
