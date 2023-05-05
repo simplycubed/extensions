@@ -1,4 +1,4 @@
-Use this extension to sync your Webflow Events data to your Firebase project. 
+Use this extension to sync your Webflow Events data to your Firebase project.
 
 This extension can be used to sync Form Submissions, Site Publishing, Ecommerce Orders and Inventory, Webflow Memberships (users), and CMS Collection Items with Cloud Storage. Each trigger of the extension is keyed to the user's Webflow `_id`.
 
