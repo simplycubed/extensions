@@ -1,6 +1,6 @@
 # Get started
 
-## Using the Webflow Events Storage extension
+## Using the Sync Webflow Events to Storage extension
 
 The Webflow Events extension (`storage-webflow-sync`) lets you sync Webflow data in your Firebase project. You can configure this extension to sync Form Submissions, Site Publishing, Ecommerce Orders and Inventory, Webflow Memberships (users), and Collection Items in the CMS with Cloud Cloud Storage. Each trigger of the extension is keyed to the user's Webflow `_id`.
 
@@ -14,7 +14,7 @@ To install the extension, follow the steps on the [Install Firebase Extension](h
 
 - **Firebase console:** Click the following button:
 
-  [Install the Webflow Events Storage extension](https://console.firebase.google.com/project/_/extensions/install?ref=simplycubed%2Fstorage-webflow-sync)
+  [Install the Sync Webflow Events to Storage extension](https://console.firebase.google.com/project/_/extensions/install?ref=simplycubed%2Fstorage-webflow-sync)
 
 - **CLI:** Run the following command:
 

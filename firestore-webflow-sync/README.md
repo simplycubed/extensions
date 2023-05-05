@@ -1,4 +1,4 @@
-# Webflow Events Firestore
+# Sync Webflow Events to Firestore
 
 **Author**: [SimplyCubed](https://simplycubed.com)
 

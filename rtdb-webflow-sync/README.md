@@ -1,4 +1,4 @@
-# Webflow Events Database
+# Sync Webflow Events to RTDB
 
 **Author**: [SimplyCubed](https://simplycubed.com)
 

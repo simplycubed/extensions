@@ -16,7 +16,7 @@ name: rtdb-webflow-sync
 version: 0.2.5
 specVersion: v1beta
 
-displayName: Webflow Events Database
+displayName: Sync Webflow Events to RTDB
 description: Webflow integration for Google Firebase Realtime Database
 icon: icon.png
 tags: [utilities]

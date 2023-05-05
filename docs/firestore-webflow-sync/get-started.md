@@ -1,6 +1,6 @@
 # Get started
 
-## Using the Webflow Events Firestore extension
+## Using the Sync Webflow Events to Firestore extension
 
 The Webflow Events extension (`firestore-webflow-sync`) lets you sync Webflow data in your Firebase project. You can configure this extension to sync Form Submissions, Site Publishing, Ecommerce Orders and Inventory, Webflow Memberships (users), and Collection Items in the CMS with Cloud Firestore. Each trigger of the extension is keyed to the user's Webflow `_id`.
 

@@ -1,4 +1,4 @@
-# Webflow Events Storage
+# Sync Webflow Events to Storage
 
 **Author**: [SimplyCubed](https://simplycubed.com)
 
