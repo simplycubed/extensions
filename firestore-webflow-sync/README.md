@@ -35,7 +35,3 @@
 This extension will operate with the following project IAM roles:
 
 - datastore.user (Reason: Allows the extension to create, update and delete user data from Cloud Firestore.)
-
-- firebasedatabase.admin (Reason: Allows the extension to create, update and delete user data from Realtime Database.)
-
-- storage.objectAdmin (Reason: Allows the extension to create, update and delete user data from Cloud Storage.)
