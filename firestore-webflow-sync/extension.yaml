@@ -48,7 +48,7 @@ resources:
   - name: webflowHook
     type: firebaseextensions.v1beta.function
     description:
-      Hooks for webflow, contains endpoints that handle events from webflow and
+      Hooks for Webflow, contains endpoints that handle events from Webflow and
       oauth endpoints for configuring webhooks.
     properties:
       location: ${param:LOCATION}
@@ -170,17 +170,17 @@ params:
     required: false
 
   - param: WEBFLOW_APP_CLIENT_ID
-    label: Client ID of the webflow app from which hooks will be created.
+    label: Client ID of the Webflow app from which hooks will be created.
     description: >-
-      Client ID of the webflow app from which hooks will be  created.
+      Client ID of the Webflow app from which hooks will be  created.
     type: secret
     example: 5af48d73b096a6712c70f11483130
     required: true
 
   - param: WEBFLOW_APP_CLIENT_SECRET
-    label: Client secret of the webflow app from which hooks will be  created.
+    label: Client secret of the Webflow app from which hooks will be  created.
     description: >-
-      Client secret of the webflow app from which hooks will be  created.
+      Client secret of the Webflow app from which hooks will be  created.
     type: secret
     example: 72811beacf8e996ba762b6c4ea7b9027
     required: true
@@ -195,4 +195,4 @@ params:
 
 events:
   - type: firebase.extensions.firestore-webflow-sync.v1.received
-    description: Occurs when a payload is received from webflow
+    description: Occurs when a payload is received from Webflow
