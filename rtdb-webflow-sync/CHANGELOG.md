@@ -1,3 +1,7 @@
+## Version 0.2.7
+
+**Note:** Version bump only for package rtdb-webflow-sync
+
 ## Version 0.2.6
 
 **Note:** Version bump only for package rtdb-webflow-sync
