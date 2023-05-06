@@ -22,15 +22,15 @@
 
 - Cloud Storage path for storing collection site publish: To which collection should the site publish events sync to? Leave empty if you don't want to sync site publish events.
 
-- Client ID of the webflow app from which hooks will be created.: Client ID of the webflow app from which hooks will be created.
+- Client ID of the Webflow app from which hooks will be created.: Client ID of the Webflow app from which hooks will be created.
 
-- Client secret of the webflow app from which hooks will be created.: Client secret of the webflow app from which hooks will be created.
+- Client secret of the Webflow app from which hooks will be created.: Client secret of the Webflow app from which hooks will be created.
 
 - Webflow site id for which hooks will be created.: Webflow site id for which hooks will be created.
 
 **Cloud Functions:**
 
-- **webflowHook:** Hooks for webflow, contains endpoints that handle events from webflow and oauth endpoints for configuring webhooks.
+- **webflowHook:** Hooks for Webflow, contains endpoints that handle events from Webflow and OAuth endpoints for configuring webhooks.
 
 **Access Required**:
 

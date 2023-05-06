@@ -14,11 +14,11 @@ const validateWebflowSignatureMw = createValidateWebflowSignatureMw(
   "<webflow-app-client-secret>"
 );
 const app = express();
-// attach middleware to webflow webhook
+// attach middleware to Webflow webhook
 app.post("/webflow-hook", validateWebflowSignatureMw, async (req, res) => {});
 ```
 
-Configure webflow OAuth endpoints to automatically create webhooks when authenticated.
+Configure Webflow OAuth endpoints to automatically create webhooks when authenticated.
 
 ```typescript
 import { configureWebflowAuthEndpoints } from "@simplycubed/webflow-utils";
