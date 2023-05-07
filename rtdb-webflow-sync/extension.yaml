@@ -221,5 +221,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.rtdb-webflow-sync.v1.received
+  - type: simplycubed.rtdb-webflow-sync.v1.received
     description: Occurs when a payload is received from webflow

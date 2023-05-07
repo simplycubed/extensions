@@ -233,7 +233,7 @@ export const handleSitePublish = async (
 
 const publishEvent = async (payload: any) => {
   await getEventarc().channel().publish({
-    type: "firebase.extensions.firestore-webflow-sync.v1.received",
+    type: "simplycubed.firestore-webflow-sync.v1.received",
     subject: "Payload Received",
     data: payload,
   });
