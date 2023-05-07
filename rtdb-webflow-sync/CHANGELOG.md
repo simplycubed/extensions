@@ -1,3 +1,9 @@
+## Version 0.2.9
+
+### Bug Fixes
+
+- rename event types ([#264](https://github.com/simplycubed/extensions/issues/264)) ([aa76c34](https://github.com/simplycubed/extensions/commit/aa76c3457fb5e6700a7050fa26eb09e1f78d7add))
+
 ## Version 0.2.8
 
 **Note:** Version bump only for package rtdb-webflow-sync
