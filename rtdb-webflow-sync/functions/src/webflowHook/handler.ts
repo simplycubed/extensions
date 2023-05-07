@@ -218,7 +218,7 @@ export const handleSitePublish = async (
 
 const publishEvent = async (payload: any) => {
   await getEventarc().channel().publish({
-    type: "firebase.extensions.rtdb-webflow-sync.v1.received",
+    type: "simplycubed.rtdb-webflow-sync.v1.received",
     subject: "Payload Received",
     data: payload,
   });

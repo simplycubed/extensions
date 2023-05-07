@@ -205,5 +205,5 @@ params:
     required: true
 
 events:
-  - type: firebase.extensions.storage-webflow-sync.v1.received
+  - type: simplycubed.storage-webflow-sync.v1.received
     description: Occurs when a payload is received from webflow
