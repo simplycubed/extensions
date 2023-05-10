@@ -1,3 +1,7 @@
+## Version 0.2.10
+
+**Note:** Version bump only for package storage-webflow-sync
+
 ## Version 0.2.9
 
 ### Bug Fixes
