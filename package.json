@@ -58,6 +58,6 @@
     "*.{js,md,yml,ts,json,yaml}": "prettier --write"
   },
   "dependencies": {
-    "npm-check-updates": "^16.10.10"
+    "npm-check-updates": "^16.10.12"
   }
 }
