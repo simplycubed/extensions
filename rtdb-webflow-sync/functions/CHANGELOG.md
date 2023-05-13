@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.11](https://github.com/simplycubed/extensions/compare/rtdb-webflow-sync@0.2.10...rtdb-webflow-sync@0.2.11) (2023-05-13)
+
+**Note:** Version bump only for package rtdb-webflow-sync
+
 ## [0.2.10](https://github.com/simplycubed/extensions/compare/rtdb-webflow-sync@0.2.9...rtdb-webflow-sync@0.2.10) (2023-05-10)
 
 **Note:** Version bump only for package rtdb-webflow-sync
