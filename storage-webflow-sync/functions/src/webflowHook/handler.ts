@@ -242,12 +242,14 @@ export const handleSitePublish = async (
 };
 
 const publishEvent = async (payload: any, type: TriggerType) => {
-  await getEventarc().channel().publish({
-    type: "simplycubed.storage-webflow-sync.v1.received",
-    subject: "Payload Received",
-    data: {
-      data: payload,
-      type,
-    },
-  });
+  await getEventarc()
+    .channel()
+    .publish({
+      type: "simplycubed.storage-webflow-sync.v1.received",
+      subject: "Payload Received",
+      data: {
+        data: payload,
+        type,
+      },
+    });
 };
