@@ -10,6 +10,7 @@ import {
   EcommOrderChanged,
   FormSubmissionPayload,
   SitePublishPayload,
+  TriggerType,
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
 } from "@simplycubed/webflow-utils";
@@ -92,7 +93,7 @@ export const handleMembershipsUserAccountAdded = async (
   if (config.userFirestorePath) {
     // sync to firestore
     await writeUserToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.memberships_user_account_added);
   }
 };
 
@@ -106,7 +107,7 @@ export const handleMembershipsUserAccountUpdated = async (
   if (config.userFirestorePath) {
     // sync to firestore
     await writeUserToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.memberships_user_account_updated);
   }
 };
 
@@ -120,7 +121,7 @@ export const handleEcommNewOrder = async (
   if (config.userFirestorePath) {
     // sync to firestore
     await writeOrderToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.ecomm_new_order);
   }
 };
 
@@ -134,7 +135,7 @@ export const handleEcommOrderUpdated = async (
   if (config.orderFirestorePath) {
     // sync to firestore
     await writeOrderToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.ecomm_order_changed);
   }
 };
 
@@ -148,7 +149,7 @@ export const handleEcommInventoryChanged = async (
   if (config.inventoryFirestorePath) {
     // sync to firestore
     await writeInventoryToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.ecomm_inventory_changed);
   }
 };
 
@@ -159,7 +160,7 @@ export const handleCollectionItemCreated = async (
   if (config.collectionItemFirestorePath) {
     // sync to firestore
     await writeCollectionItemToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_created);
   }
 };
 
@@ -173,7 +174,7 @@ export const handleCollectionItemChanged = async (
   if (config.collectionItemFirestorePath) {
     // sync to firestore
     await writeCollectionItemToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_changed);
   }
 };
 
@@ -187,7 +188,7 @@ export const handleCollectionItemDeleted = async (
   if (config.collectionItemFirestorePath) {
     // delete from firestore
     await deleteCollectionItemFromFirestore(db, payload.itemId);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_deleted);
   }
 };
 
@@ -201,7 +202,7 @@ export const handleCollectionItemUnpublished = async (
   if (config.collectionItemFirestorePath) {
     // delete from firestore
     await deleteCollectionItemFromFirestore(db, payload.itemId);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_unpublished);
   }
 };
 
@@ -214,7 +215,7 @@ export const handleFormSubmission = async (
 ) => {
   if (config.formSubmissionFirstorePath) {
     await writeFormSubmissionToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.form_submission);
   }
 };
 
@@ -227,14 +228,19 @@ export const handleSitePublish = async (
 ) => {
   if (config.sitePublishFirestorePath) {
     await writeSitePublishToFirestore(db, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.site_publish);
   }
 };
 
-const publishEvent = async (payload: any) => {
-  await getEventarc().channel().publish({
-    type: "simplycubed.firestore-webflow-sync.v1.received",
-    subject: "Payload Received",
-    data: payload,
-  });
+const publishEvent = async (payload: any, type: TriggerType) => {
+  await getEventarc()
+    .channel()
+    .publish({
+      type: "simplycubed.firestore-webflow-sync.v1.received",
+      subject: "Payload Received",
+      data: {
+        data: payload,
+        type,
+      },
+    });
 };

@@ -10,6 +10,7 @@ import {
   EcommOrderChanged,
   FormSubmissionPayload,
   SitePublishPayload,
+  TriggerType,
   UserAccountAddedPayload,
   UserAccountUpdatedPayload,
 } from "@simplycubed/webflow-utils";
@@ -85,7 +86,7 @@ export const handleMembershipsUserAccountAdded = async (
 ) => {
   if (config.userDatabasePath) {
     await writeUserToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.memberships_user_account_added);
   }
 };
 
@@ -98,7 +99,7 @@ export const handleMembershipsUserAccountUpdated = async (
 ) => {
   if (config.userDatabasePath) {
     await writeUserToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.memberships_user_account_updated);
   }
 };
 
@@ -111,7 +112,7 @@ export const handleEcommNewOrder = async (
 ) => {
   if (config.orderDatabasePath) {
     await writeOrderToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.ecomm_new_order);
   }
 };
 
@@ -124,7 +125,7 @@ export const handleEcommOrderUpdated = async (
 ) => {
   if (config.orderDatabasePath) {
     await writeOrderToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.ecomm_order_changed);
   }
 };
 
@@ -137,7 +138,7 @@ export const handleEcommInventoryChanged = async (
 ) => {
   if (config.inventoryDatabasePath) {
     await writeInventoryToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.ecomm_inventory_changed);
   }
 };
 
@@ -147,7 +148,7 @@ export const handleCollectionItemCreated = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await writeCollectionItemToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_created);
   }
 };
 
@@ -160,7 +161,7 @@ export const handleCollectionItemChanged = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await writeCollectionItemToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_changed);
   }
 };
 
@@ -173,7 +174,7 @@ export const handleCollectionItemDeleted = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await deleteCollectionItemFromDatabase(realtimeDb, payload.itemId);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_deleted);
   }
 };
 
@@ -186,7 +187,7 @@ export const handleCollectionItemUnpublished = async (
 ) => {
   if (config.collectionItemDatabasePath) {
     await deleteCollectionItemFromDatabase(realtimeDb, payload.itemId);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.collection_item_unpublished);
   }
 };
 
@@ -199,7 +200,7 @@ export const handleFormSubmission = async (
 ) => {
   if (config.formSubmissionDatabasePath) {
     await writeFormSubmissionToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.form_submission);
   }
 };
 
@@ -212,14 +213,19 @@ export const handleSitePublish = async (
 ) => {
   if (config.sitePublishDatabasePath) {
     await writeSitePublishToDatabase(realtimeDb, payload);
-    await publishEvent(payload);
+    await publishEvent(payload, TriggerType.site_publish);
   }
 };
 
-const publishEvent = async (payload: any) => {
-  await getEventarc().channel().publish({
-    type: "simplycubed.rtdb-webflow-sync.v1.received",
-    subject: "Payload Received",
-    data: payload,
-  });
+const publishEvent = async (payload: any, type: TriggerType) => {
+  await getEventarc()
+    .channel()
+    .publish({
+      type: "simplycubed.rtdb-webflow-sync.v1.received",
+      subject: "Payload Received",
+      data: {
+        data: payload,
+        type,
+      },
+    });
 };
