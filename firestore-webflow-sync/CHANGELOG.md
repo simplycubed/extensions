@@ -1,3 +1,9 @@
+## Version 0.3.0
+
+### Features
+
+- add event type to payload ([#275](https://github.com/simplycubed/extensions/issues/275)) ([f7913cc](https://github.com/simplycubed/extensions/commit/f7913cc7bc118ecdcd22b71aa79895dfe3b85fb0))
+
 ## Version 0.2.11
 
 **Note:** Version bump only for package firestore-webflow-sync

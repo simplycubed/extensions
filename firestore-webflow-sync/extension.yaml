@@ -13,7 +13,7 @@
 # limitations under the License.
 
 name: firestore-webflow-sync
-version: 0.2.11
+version: 0.3.0
 specVersion: v1beta
 
 displayName: Sync Webflow Events to Firestore

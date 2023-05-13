@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/simplycubed/extensions/compare/storage-webflow-sync@0.2.11...storage-webflow-sync@0.3.0) (2023-05-13)
+
+### Features
+
+- add event type to payload ([#275](https://github.com/simplycubed/extensions/issues/275)) ([f7913cc](https://github.com/simplycubed/extensions/commit/f7913cc7bc118ecdcd22b71aa79895dfe3b85fb0))
+
 ## [0.2.11](https://github.com/simplycubed/extensions/compare/storage-webflow-sync@0.2.10...storage-webflow-sync@0.2.11) (2023-05-13)
 
 **Note:** Version bump only for package storage-webflow-sync
