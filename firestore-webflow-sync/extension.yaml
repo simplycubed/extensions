@@ -38,6 +38,10 @@ contributors:
 
 billingRequired: true
 
+externalServices:
+  - name: Webflow
+    PricingUri: https://webflow.com/pricing
+
 roles:
   - role: datastore.user
     reason:
