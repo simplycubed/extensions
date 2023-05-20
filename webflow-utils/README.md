@@ -37,3 +37,5 @@ configureWebflowAuthEndpoints(app, webflow, {
   webflowSiteID: "<webflow-site-id>",
 });
 ```
+
+[![SimplyCubed Extensions: Starter Kits](../starter-kits.png)](https://webevents.dev/)

@@ -35,3 +35,5 @@
 This extension will operate with the following project IAM roles:
 
 - datastore.user (Reason: Allows the extension to create, update and delete user data from Cloud Firestore.)
+
+[![SimplyCubed Extensions: Starter Kits](../starter-kits.png)](https://webevents.dev/)

@@ -39,3 +39,5 @@
 This extension will operate with the following project IAM roles:
 
 - firebasedatabase.admin (Reason: Allows the extension to create, update and delete user data from Realtime Database.)
+
+[![SimplyCubed Extensions: Starter Kits](../starter-kits.png)](https://webevents.dev/)

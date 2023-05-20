@@ -12,6 +12,8 @@ You can also browse official Firebase extensions from the following sources:
 - [Firebase Extensions dashboard](https://console.firebase.google.com/project/_/extensions/) in the Firebase console
   You can also browse official Firebase extensions on the [Extensions Marketplace](https://extensions.dev).
 
+[![SimplyCubed Extensions: Starter Kits](starter-kits.png)](https://webevents.dev/)
+
 ## Running tests
 
 Running `npm run test:emulator` will spwan firebase emulator and run tests inside it.
