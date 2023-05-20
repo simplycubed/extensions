@@ -37,3 +37,5 @@
 This extension will operate with the following project IAM roles:
 
 - storage.objectAdmin (Reason: Allows the extension to create, update and delete user data from Cloud Storage.)
+
+[![SimplyCubed Extensions: Starter Kits](../starter-kits.png)](https://webevents.dev/)
