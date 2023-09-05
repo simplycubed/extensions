@@ -30,7 +30,7 @@
     "firebase-functions": "^4.4.1"
   },
   "devDependencies": {
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "private": true
 }
